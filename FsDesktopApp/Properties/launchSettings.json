@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "FsDesktopApp (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "FsDesktopApp (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}

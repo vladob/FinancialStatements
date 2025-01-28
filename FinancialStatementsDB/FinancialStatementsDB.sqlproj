@@ -1,0 +1,136 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <Name>FinancialStatementsDB</Name>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectVersion>4.1</ProjectVersion>
+    <ProjectGuid>{e3d21874-c30e-4b87-94b7-26177ef24416}</ProjectGuid>
+    <DSP>Microsoft.Data.Tools.Schema.Sql.Sql160DatabaseSchemaProvider</DSP>
+    <OutputType>Database</OutputType>
+    <RootPath>
+    </RootPath>
+    <RootNamespace>FinancialStatementsDB</RootNamespace>
+    <AssemblyName>FinancialStatementsDB</AssemblyName>
+    <ModelCollation>1051,CI</ModelCollation>
+    <DefaultFileStructure>BySchemaAndSchemaType</DefaultFileStructure>
+    <DeployToDatabase>True</DeployToDatabase>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <TargetLanguage>CS</TargetLanguage>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <SqlServerVerification>False</SqlServerVerification>
+    <IncludeCompositeObjects>True</IncludeCompositeObjects>
+    <TargetDatabaseSet>True</TargetDatabaseSet>
+    <DefaultCollation>Slovak_CI_AS</DefaultCollation>
+    <DefaultFilegroup>PRIMARY</DefaultFilegroup>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>False</TreatWarningsAsErrors>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">11.0</VisualStudioVersion>
+    <!-- Default to the v11.0 targets path if the targets file for the current VS version is not found -->
+    <SSDTExists Condition="Exists('$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets')">True</SSDTExists>
+    <VisualStudioVersion Condition="'$(SSDTExists)' == ''">11.0</VisualStudioVersion>
+  </PropertyGroup>
+  <Import Condition="'$(SQLDBExtensionsRefPath)' != ''" Project="$(SQLDBExtensionsRefPath)\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <Import Condition="'$(SQLDBExtensionsRefPath)' == ''" Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <ItemGroup>
+    <Folder Include="Properties" />
+    <Folder Include="versioning\" />
+    <Folder Include="versioning\Tables\" />
+    <Folder Include="classifications\" />
+    <Folder Include="classifications\Tables\" />
+    <Folder Include="staging\" />
+    <Folder Include="staging\Tables\" />
+    <Folder Include="dbo\" />
+    <Folder Include="dbo\Tables\" />
+    <Folder Include="indexing\" />
+    <Folder Include="indexing\Tables\" />
+    <Folder Include="Security\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Build Include="versioning\Tables\LegalFormsHistory.sql" />
+    <Build Include="classifications\Tables\LegalForms.sql" />
+    <Build Include="staging\Tables\LegalForms.sql" />
+    <Build Include="versioning\Tables\SkNaceHistory.sql" />
+    <Build Include="classifications\Tables\SkNace.sql" />
+    <Build Include="staging\Tables\SkNace.sql" />
+    <Build Include="versioning\Tables\OwnershipTypesHistory.sql" />
+    <Build Include="classifications\Tables\OwnershipTypes.sql" />
+    <Build Include="staging\Tables\OwnershipTypes.sql" />
+    <Build Include="versioning\Tables\OrganizationSizesHistory.sql" />
+    <Build Include="classifications\Tables\OrganizationSizes.sql" />
+    <Build Include="staging\Tables\OrganizationSizes.sql" />
+    <Build Include="versioning\Tables\LocationsHistory.sql" />
+    <Build Include="classifications\Tables\Locations.sql" />
+    <Build Include="staging\Tables\Locations.sql" />
+    <Build Include="versioning\Tables\AccountingEntitiesHistory.sql" />
+    <Build Include="dbo\Tables\AccountingEntities.sql" />
+    <Build Include="staging\Tables\AccountingEntities.sql" />
+    <Build Include="versioning\Tables\FinancialStatementsHistory.sql" />
+    <Build Include="dbo\Tables\FinancialStatements.sql" />
+    <Build Include="staging\Tables\FinancialStatements.sql" />
+    <Build Include="versioning\Tables\AnnualReportsHistory.sql" />
+    <Build Include="dbo\Tables\AnnualReports.sql" />
+    <Build Include="staging\Tables\AnnualReports.sql" />
+    <Build Include="versioning\Tables\FinancialReportsHistory.sql" />
+    <Build Include="dbo\Tables\FinancialReports.sql" />
+    <Build Include="staging\Tables\FinancialReports.sql" />
+    <Build Include="versioning\Tables\AttachmentsHistory.sql" />
+    <Build Include="dbo\Tables\Attachments.sql" />
+    <Build Include="staging\Tables\Attachments.sql" />
+    <Build Include="versioning\Tables\ReportContentsHistory.sql" />
+    <Build Include="dbo\Tables\ReportContents.sql" />
+    <Build Include="staging\Tables\ReportContents.sql" />
+    <Build Include="versioning\Tables\ReportTablesHistory.sql" />
+    <Build Include="dbo\Tables\ReportTables.sql" />
+    <Build Include="staging\Tables\ReportTables.sql" />
+    <Build Include="versioning\Tables\AnnualReportAttachmentsHistory.sql" />
+    <Build Include="dbo\Tables\AnnualReportAttachments.sql" />
+    <Build Include="staging\Tables\AnnualReportAttachments.sql" />
+    <Build Include="versioning\Tables\FinancialReportTemplatesHistory.sql" />
+    <Build Include="dbo\Tables\FinancialReportTemplates.sql" />
+    <Build Include="staging\Tables\FinancialReportTemplates.sql" />
+    <Build Include="versioning\Tables\TemplateTablesHistory.sql" />
+    <Build Include="dbo\Tables\TemplateTables.sql" />
+    <Build Include="staging\Tables\TemplateTables.sql" />
+    <Build Include="versioning\Tables\TemplateHeadersHistory.sql" />
+    <Build Include="dbo\Tables\TemplateHeaders.sql" />
+    <Build Include="staging\Tables\TemplateHeaders.sql" />
+    <Build Include="versioning\Tables\TemplateRowsHistory.sql" />
+    <Build Include="dbo\Tables\TemplateRows.sql" />
+    <Build Include="staging\Tables\TemplateRows.sql" />
+    <Build Include="indexing\Tables\AccountingEntities_FinancialStatements.sql" />
+    <Build Include="indexing\Tables\AccountingEntities_AnnualReports.sql" />
+    <Build Include="dbo\Tables\__EFMigrationsHistory.sql" />
+    <Build Include="Security\vb.sql" />
+    <Build Include="Security\vb_1.sql" />
+    <Build Include="Security\RoleMemberships.sql" />
+    <Build Include="Security\classifications.sql" />
+    <Build Include="Security\indexing.sql" />
+    <Build Include="Security\staging.sql" />
+    <Build Include="Security\versioning.sql" />
+  </ItemGroup>
+</Project>

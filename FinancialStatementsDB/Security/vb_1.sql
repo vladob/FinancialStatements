@@ -1,0 +1,3 @@
+﻿CREATE LOGIN [vb]
+    WITH PASSWORD = N'xngd: h|pePvwyzou{dq{j{FmsFT7_&#$!~<waew0wSF}xuL', SID = 0x38DD54BBEED5C745A02188BACDE11DAA, DEFAULT_LANGUAGE = [us_english], CHECK_POLICY = OFF;
+
