@@ -19,6 +19,8 @@ namespace FsDataAccess.Configurations
         {
             entity.HasKey(e => e.Id).HasName("PK_dbo_TemplateTables");
 
+            entity.ToTable("TemplateTables", _schema);
+
             entity.Property(e => e.NameSk).HasMaxLength(100).IsUnicode(false).HasColumnName("nameSk");
             entity.Property(e => e.NameEn).HasMaxLength(100).IsUnicode(false).HasColumnName("nameEn");
             entity.Property(e => e.NumberOfColumns).HasMaxLength(100).IsUnicode(false).HasColumnName("NumberOfColumns");

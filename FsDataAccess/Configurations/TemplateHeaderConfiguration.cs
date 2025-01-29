@@ -19,6 +19,8 @@ namespace FsDataAccess.Configurations
         {
             entity.HasKey(e => e.Id).HasName("PK_dbo_TemplateHeaders");
 
+            entity.ToTable("TemplateHeaders", _schema);
+
             entity.Property(e => e.ErpId).HasColumnName("ErpId");
             entity.Property(e => e.ColumnPosition).HasColumnName("columnPosition");
             entity.Property(e => e.ColumnSpan).HasColumnName("columnSpan");

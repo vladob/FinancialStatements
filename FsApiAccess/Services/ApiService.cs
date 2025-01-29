@@ -211,7 +211,7 @@ namespace FsApiAccess.Services
                         ValidFrom = responseData.platneOd,
                         ValidTo = responseData.platneDo
                     };
-/*
+
                     foreach (var table in responseData.tabulky)
                     {
                         var templateTable = new FsDataAccess.Models.TemplateTable
@@ -238,6 +238,7 @@ namespace FsApiAccess.Services
                             templateTable.TemplateHeaders.Add(templateHeader);
                         }
 
+
                         foreach (var row in table.riadky)
                         {
                             var templateRow = new FsDataAccess.Models.TemplateRow
@@ -253,7 +254,7 @@ namespace FsApiAccess.Services
 
                         template.TemplateTables.Add(templateTable);
                     }
-*/
+
                     _context.StagingFinancialReportTemplates.Add(template);
                     await _context.SaveChangesAsync();
 
