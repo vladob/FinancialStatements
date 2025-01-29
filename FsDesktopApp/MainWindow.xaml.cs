@@ -27,6 +27,7 @@ namespace FsDesktopApp
             await _apiService.RetrieveAndStoreSkNaceAsync();
             await _apiService.RetrieveAndStoreOwnershipTypesAsync();
             await _apiService.RetrieveAndStoreOrganizationSizesAsync();
+            await _apiService.RetrieveAndStoreLocationsAllAsync();
         }
     }
 }

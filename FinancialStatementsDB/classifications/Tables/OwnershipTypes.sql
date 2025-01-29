@@ -1,6 +1,6 @@
 ﻿CREATE TABLE [classifications].[OwnershipTypes] (
     [Id]           INT                                         IDENTITY (1, 1) NOT NULL,
-    [Code]         VARCHAR (100)                               NULL,
+    [Code]         VARCHAR (100)                               NOT NULL,
     [TitleEng]     NVARCHAR (250)                              NULL,
     [TitleSk]      NVARCHAR (250)                              NULL,
     [SysStartTime] DATETIME2 (7) GENERATED ALWAYS AS ROW START NOT NULL,

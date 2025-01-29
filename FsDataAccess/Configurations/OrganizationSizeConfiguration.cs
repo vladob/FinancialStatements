@@ -36,9 +36,7 @@ namespace FsDataAccess.Configurations
                 entity.Property<DateTime>("SysEndTime").ValueGeneratedOnAddOrUpdate().Metadata.SetAfterSaveBehavior(PropertySaveBehavior.Ignore);
             }
 
-            entity.Property(e => e.Code)
-                .HasMaxLength(100)
-                .IsUnicode(false);
+            entity.Property(e => e.Code).HasMaxLength(100).IsUnicode(false);
             entity.Property(e => e.TitleEng).HasMaxLength(250);
             entity.Property(e => e.TitleSk).HasMaxLength(250);
         }

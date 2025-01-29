@@ -3,6 +3,7 @@ using System.Net.Http.Json;
 using System.Threading.Tasks;
 using FsApiAccess.Models;
 using FsDataAccess.Models;
+using FsDataAccess.Tasks;
 using Microsoft.Extensions.Logging;
 
 namespace FsApiAccess.Services
@@ -40,6 +41,10 @@ namespace FsApiAccess.Services
                         _context.StagingLegalForms.Add(entity);
                     }
                     await _context.SaveChangesAsync();
+
+                    // Call the upsert task
+                    var upsertTask = new UpsertLegalFormsTask(_context);
+                    await upsertTask.UpsertLegalFormsAsync();
                 }
             }
             catch (Exception ex)
@@ -69,6 +74,10 @@ namespace FsApiAccess.Services
                         _context.StagingSkNaces.Add(entity);
                     }
                     await _context.SaveChangesAsync();
+
+                    // Call the upsert task
+                    var upsertTask = new UpsertSkNaceTask(_context);
+                    await upsertTask.UpsertSkNaceAsync();
                 }
             }
             catch (Exception ex)
@@ -99,6 +108,10 @@ namespace FsApiAccess.Services
                         _context.StagingOwnershipTypes.Add(entity);
                     }
                     await _context.SaveChangesAsync();
+
+                    // Call the upsert task
+                    var upsertTask = new UpsertOwnershipTypesTask(_context);
+                    await upsertTask.UpsertOwnershipTypesAsync();
                 }
             }
             catch (Exception ex)
@@ -128,6 +141,10 @@ namespace FsApiAccess.Services
                         _context.StagingOrganizationSizes.Add(entity);
                     }
                     await _context.SaveChangesAsync();
+
+                    // Call the upsert task
+                    var upsertTask = new UpsertOrganizationSizesTask(_context);
+                    await upsertTask.UpsertOrganizationSizesAsync();
                 }
             }
             catch (Exception ex)
@@ -137,28 +154,32 @@ namespace FsApiAccess.Services
             }
         }
 
-        public async Task RetrieveAndStoreLocationsAsync()
+        public async Task RetrieveAndStoreLocationsAllAsync()
         {
-            await RetrieveAndStoreRegionsAsync();
-            await RetrieveAndStoreMunicipalitiesAsync();
-            await RetrieveAndStoreDistrictsAsync();
+            await RetrieveAndStoreLocationsAsync("https://www.registeruz.sk/cruz-public/api/kraje");
+            await RetrieveAndStoreLocationsAsync("https://www.registeruz.sk/cruz-public/api/okresy");
+            await RetrieveAndStoreLocationsAsync("https://www.registeruz.sk/cruz-public/api/sidla");
+            // Call the upsert task
+            var upsertTask = new UpsertLocationsTask(_context);
+            await upsertTask.UpsertLocationsAsync();
         }
 
-        private async Task RetrieveAndStoreRegionsAsync()
+        public async Task RetrieveAndStoreLocationsAsync(string apiUrl)
         {
-            var apiUrl = "https://www.registeruz.sk/cruz-public/api/kraje";
+            //var apiUrl = "https://www.registeruz.sk/cruz-public/api/kraje";
             try
             {
                 var responseData = await _httpClient.GetFromJsonAsync<ApiClasificationResponseModel>(apiUrl);
 
-                if (responseData?.Klasifikacie != null)
+                if (responseData?.Lokacie != null)
                 {
-                    foreach (var item in responseData.Klasifikacie)
+                    foreach (var item in responseData.Lokacie)
                     {
                         var entity = new Location
                         {
                             Code = item.Kod,
                             TitleSk = item.Nazov.Sk,
+                            TitleEng = item.Nazov.En,
                             ParentLocation = null
                         };
                         _context.StagingLocations.Add(entity);
@@ -169,64 +190,6 @@ namespace FsApiAccess.Services
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Error retrieving and storing regions.");
-                // Handle the error (e.g., retry, notify user, etc.)
-            }
-        }
-
-        private async Task RetrieveAndStoreMunicipalitiesAsync()
-        {
-            var apiUrl = "https://www.registeruz.sk/cruz-public/api/okresy";
-            try
-            {
-                var responseData = await _httpClient.GetFromJsonAsync<ApiClasificationResponseModel>(apiUrl);
-
-                if (responseData?.Klasifikacie != null)
-                {
-                    foreach (var item in responseData.Klasifikacie)
-                    {
-                        var entity = new Location
-                        {
-                            Code = item.Kod,
-                            TitleSk = item.Nazov.Sk,
-                            ParentLocation = item.NadriadenaKlasifikacia
-                        };
-                        _context.StagingLocations.Add(entity);
-                    }
-                    await _context.SaveChangesAsync();
-                }
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "Error retrieving and storing municipalities.");
-                // Handle the error (e.g., retry, notify user, etc.)
-            }
-        }
-
-        private async Task RetrieveAndStoreDistrictsAsync()
-        {
-            var apiUrl = "https://www.registeruz.sk/cruz-public/api/sidla";
-            try
-            {
-                var responseData = await _httpClient.GetFromJsonAsync<ApiClasificationResponseModel>(apiUrl);
-
-                if (responseData?.Klasifikacie != null)
-                {
-                    foreach (var item in responseData.Klasifikacie)
-                    {
-                        var entity = new Location
-                        {
-                            Code = item.Kod,
-                            TitleSk = item.Nazov.Sk,
-                            ParentLocation = item.NadriadenaKlasifikacia
-                        };
-                        _context.StagingLocations.Add(entity);
-                    }
-                    await _context.SaveChangesAsync();
-                }
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "Error retrieving and storing districts.");
                 // Handle the error (e.g., retry, notify user, etc.)
             }
         }
