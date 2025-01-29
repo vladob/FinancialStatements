@@ -13,7 +13,8 @@ public partial class TemplateRow
 
     public int? RowNumber { get; set; }
 
-    public string? Description { get; set; }
+    public string? DescriptionSk { get; set; }
+    public string? DescriptionEn { get; set; }
 
     public virtual TemplateTable? TemplateTable { get; set; }
 }

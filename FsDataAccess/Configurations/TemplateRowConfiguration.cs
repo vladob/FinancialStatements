@@ -19,13 +19,9 @@ namespace FsDataAccess.Configurations
         {
             entity.HasKey(e => e.Id).HasName("PK_dbo_TemplateRows");
 
-            entity.Property(e => e.Code)
-                .HasMaxLength(100)
-                .IsUnicode(false)
-                .HasColumnName("code");
-            entity.Property(e => e.Description)
-                .IsUnicode(false)
-                .HasColumnName("description");
+            entity.Property(e => e.Code).HasMaxLength(100).IsUnicode(false).HasColumnName("code");
+            entity.Property(e => e.DescriptionSk).IsUnicode(false).HasColumnName("descriptionSk");
+            entity.Property(e => e.DescriptionEn).IsUnicode(false).HasColumnName("descriptionEn");
             entity.Property(e => e.RowNumber).HasColumnName("rowNumber");
 
             entity.HasOne(d => d.TemplateTable).WithMany(p => p.TemplateRows)

@@ -19,13 +19,13 @@ namespace FsDataAccess.Configurations
         {
             entity.HasKey(e => e.Id).HasName("PK_dbo_TemplateHeaders");
 
+            entity.Property(e => e.ErpId).HasColumnName("ErpId");
             entity.Property(e => e.ColumnPosition).HasColumnName("columnPosition");
             entity.Property(e => e.ColumnSpan).HasColumnName("columnSpan");
             entity.Property(e => e.RowPosition).HasColumnName("rowPosition");
             entity.Property(e => e.RowSpan).HasColumnName("rowSpan");
-            entity.Property(e => e.Text)
-                .IsUnicode(false)
-                .HasColumnName("text");
+            entity.Property(e => e.TextSk).IsUnicode(false).HasColumnName("textSk");
+            entity.Property(e => e.TextEn).IsUnicode(false).HasColumnName("textEn");
 
             entity.HasOne(d => d.TemplateTable).WithMany(p => p.TemplateHeaders)
                 .HasForeignKey(d => d.TemplateTableId)

@@ -193,5 +193,81 @@ namespace FsApiAccess.Services
                 // Handle the error (e.g., retry, notify user, etc.)
             }
         }
+
+        public async Task RetrieveAndStoreFinancialReportTemplateAsync(int templateId)
+        {
+            var apiUrl = $"https://www.registeruz.sk/cruz-public/api/sablona?id={templateId}";
+            try
+            {
+                var responseData = await _httpClient.GetFromJsonAsync<ApiFinancialReportTemplateModel>(apiUrl);
+
+                if (responseData != null)
+                {
+                    var template = new FsDataAccess.Models.FinancialReportTemplate
+                    {
+                        ErpId = responseData.id,
+                        Name = responseData.nazov,
+                        MfSpecification = responseData.nariadenieMF,
+                        ValidFrom = responseData.platneOd,
+                        ValidTo = responseData.platneDo
+                    };
+/*
+                    foreach (var table in responseData.tabulky)
+                    {
+                        var templateTable = new FsDataAccess.Models.TemplateTable
+                        {
+                            NameSk = table.nazov.Sk,
+                            NameEn = table.nazov.En,
+                            NumberOfDataColumns = table.pocetDatovychStlpcov,
+                            NumberOfColumns = table.pocetStlpcov,
+                            FinancialReportTemplate = template
+                        };
+
+                        foreach (var header in table.hlavicka)
+                        {
+                            var templateHeader = new FsDataAccess.Models.TemplateHeader
+                            {
+                                TextSk = header.text.Sk,
+                                TextEn = header.text.En,
+                                RowPosition = header.riadok,
+                                ColumnSpan = header.sirkaStlpca,
+                                ColumnPosition = header.stlpec,
+                                RowSpan = header.vyskaRiadku,
+                                TemplateTable = templateTable
+                            };
+                            templateTable.TemplateHeaders.Add(templateHeader);
+                        }
+
+                        foreach (var row in table.riadky)
+                        {
+                            var templateRow = new FsDataAccess.Models.TemplateRow
+                            {
+                                Code = row.oznacenie,
+                                RowNumber = row.cisloRiadku,
+                                DescriptionSk = row.text.Sk,
+                                DescriptionEn = row.text.En,
+                                TemplateTable = templateTable
+                            };
+                            templateTable.TemplateRows.Add(templateRow);
+                        }
+
+                        template.TemplateTables.Add(templateTable);
+                    }
+*/
+                    _context.StagingFinancialReportTemplates.Add(template);
+                    await _context.SaveChangesAsync();
+
+                    // Call the upsert task
+                    var upsertTask = new UpsertFinancialReportTemplatesTask(_context);
+                    await upsertTask.UpsertFinancialReportTemplatesAsync();
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error retrieving and storing financial report template.");
+                // Handle the error (e.g., retry, notify user, etc.)
+            }
+        }
+
     }
 }
