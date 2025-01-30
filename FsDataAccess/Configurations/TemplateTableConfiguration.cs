@@ -1,5 +1,6 @@
 using FsDataAccess.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace FsDataAccess.Configurations
@@ -17,9 +18,23 @@ namespace FsDataAccess.Configurations
 
         public void Configure(EntityTypeBuilder<TemplateTable> entity)
         {
-            entity.HasKey(e => e.Id).HasName("PK_dbo_TemplateTables");
+            entity.HasKey(e => e.Id).HasName($"PK_{_schema}_TemplateTables");
 
             entity.ToTable("TemplateTables", _schema);
+
+            if (_useHistoryTable)
+            {
+                entity.ToTable(tb => tb.IsTemporal(ttb =>
+                {
+                    ttb.UseHistoryTable("TemplateTablesHistory", "versioning");
+                    ttb.HasPeriodStart("SysStartTime").HasColumnName("SysStartTime");
+                    ttb.HasPeriodEnd("SysEndTime").HasColumnName("SysEndTime");
+                }));
+
+                // Configure SysStartTime and SysEndTime as read-only
+                entity.Property<DateTime>("SysStartTime").ValueGeneratedOnAddOrUpdate().Metadata.SetAfterSaveBehavior(PropertySaveBehavior.Ignore);
+                entity.Property<DateTime>("SysEndTime").ValueGeneratedOnAddOrUpdate().Metadata.SetAfterSaveBehavior(PropertySaveBehavior.Ignore);
+            }
 
             entity.Property(e => e.NameSk).HasMaxLength(100).IsUnicode(false).HasColumnName("nameSk");
             entity.Property(e => e.NameEn).HasMaxLength(100).IsUnicode(false).HasColumnName("nameEn");

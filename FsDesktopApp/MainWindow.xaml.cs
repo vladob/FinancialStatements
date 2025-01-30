@@ -23,14 +23,15 @@ namespace FsDesktopApp
 
         private async Task RetrieveAndStoreDataAsync()
         {
-/*            
-            await _apiService.RetrieveAndStoreLegalFormsAsync();
-            await _apiService.RetrieveAndStoreSkNaceAsync();
-            await _apiService.RetrieveAndStoreOwnershipTypesAsync();
-            await _apiService.RetrieveAndStoreOrganizationSizesAsync();
-            await _apiService.RetrieveAndStoreLocationsAllAsync();
-*/            
-            await _apiService.RetrieveAndStoreFinancialReportTemplateAsync(0);
+            /*            
+                        await _apiService.RetrieveAndStoreLegalFormsAsync();
+                        await _apiService.RetrieveAndStoreSkNaceAsync();
+                        await _apiService.RetrieveAndStoreOwnershipTypesAsync();
+                        await _apiService.RetrieveAndStoreOrganizationSizesAsync();
+                        await _apiService.RetrieveAndStoreLocationsAllAsync();
+            */
+            //            await _apiService.RetrieveAndStoreFinancialReportTemplateAsync(7);
+            await _apiService.RetrieveAllFinancialReportTemplatesAsync();
         }
     }
 }

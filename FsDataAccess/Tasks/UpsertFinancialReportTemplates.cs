@@ -2,12 +2,14 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using FsDataAccess.Models;
 using Microsoft.Data.SqlClient;
+using Microsoft.Extensions.Logging;
 
 namespace FsDataAccess.Tasks
 {
     public class UpsertFinancialReportTemplatesTask
     {
         private readonly FinancialStatementsContext _context;
+        private readonly ILogger<UpsertFinancialReportTemplatesTask> _logger;
 
         public UpsertFinancialReportTemplatesTask(FinancialStatementsContext context)
         {
@@ -27,7 +29,15 @@ namespace FsDataAccess.Tasks
                     await connection.OpenAsync();
                 }
 
-                await command.ExecuteNonQueryAsync();
+                try
+                {
+                    await command.ExecuteNonQueryAsync();
+                }
+                catch (Exception ex)
+                {
+                    _logger.LogError(ex, "Error saving financial report template to the database.");
+                    throw; // Re-throw the exception to handle it further up the call stack if needed
+                }
             }
         }
     }

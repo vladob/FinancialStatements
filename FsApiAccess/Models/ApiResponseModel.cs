@@ -22,6 +22,11 @@ namespace FsApiAccess.Models
         public string En { get; set; }
         public string Sk { get; set; }
     }
+
+    public class ApiAllFinancialReportTemplatesResponseModel
+    {
+       public List<ApiFinancialReportTemplateModel> sablony { get; set; } = new List<ApiFinancialReportTemplateModel>();
+    }
     public partial class ApiFinancialReportTemplateModel
     {
         public int id { get; set; }
