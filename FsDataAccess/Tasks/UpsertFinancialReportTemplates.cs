@@ -19,7 +19,7 @@ namespace FsDataAccess.Tasks
             var connection = _context.Database.GetDbConnection();
             await using (var command = connection.CreateCommand())
             {
-                command.CommandText = "EXEC [Upsert].[FinancialReportTemplates];";
+                command.CommandText = "EXEC [Upsert].[Templates];";
                 command.CommandType = System.Data.CommandType.Text;
 
                 if (connection.State != System.Data.ConnectionState.Open)

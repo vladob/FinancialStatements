@@ -13,7 +13,6 @@ namespace FsApiAccess.Services
         private readonly HttpClient _httpClient;
         private readonly FinancialStatementsContext _context;
         private readonly ILogger<ApiService> _logger;
-
         public ApiService(HttpClient httpClient, FinancialStatementsContext context, ILogger<ApiService> logger)
         {
             _httpClient = httpClient;
@@ -192,6 +191,12 @@ namespace FsApiAccess.Services
                 _logger.LogError(ex, "Error retrieving and storing regions.");
                 // Handle the error (e.g., retry, notify user, etc.)
             }
+        }
+
+        public async Task RetrieveAndStoreFinancialAllReportTemplatesAsync()
+        {
+            var apiUrl = $"https://www.registeruz.sk/cruz-public/api/sablony";
+
         }
 
         public async Task RetrieveAndStoreFinancialReportTemplateAsync(int templateId)
