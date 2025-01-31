@@ -22,7 +22,7 @@ namespace FsDataAccess.Models
             var connectionString = configuration.GetConnectionString("FinancialStatementsDb");
             optionsBuilder.UseSqlServer(connectionString);
 
-            return new FinancialStatementsContext(optionsBuilder.Options, configuration);
+            return new FinancialStatementsContext(optionsBuilder.Options, configuration, null);
         }
     }
 }

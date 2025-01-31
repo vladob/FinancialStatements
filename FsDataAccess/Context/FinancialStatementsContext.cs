@@ -1,21 +1,29 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Security.Cryptography;
+using FsDataAccess.Cache;
 using FsDataAccess.Configurations;
 using FsDataAccess.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 
 namespace FsDataAccess.Models;
 
 public partial class FinancialStatementsContext : DbContext
 {
     private readonly IConfiguration _configuration;
+    private readonly ILogger _logger;
 
-    public FinancialStatementsContext(DbContextOptions<FinancialStatementsContext> options, IConfiguration configuration)
-    : base(options)
+    public FinancialStatementsContext(DbContextOptions<FinancialStatementsContext> options, IConfiguration configuration, ILogger<FinancialStatementsContext> logger)
+        : base(options)
     {
-        _configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
+        _configuration = configuration;
+        _logger = logger;
+    }
+    public async Task InitializeAsync()
+    {
+        await ClassificationCache.LoadCacheAsync(this, _logger);
     }
 
     public FinancialStatementsContext()

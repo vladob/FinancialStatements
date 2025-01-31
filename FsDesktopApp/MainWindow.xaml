@@ -10,6 +10,8 @@
     Title="FsDesktopApp">
 
     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-        <Button x:Name="myButton" Click="OnRetrieveDataButtonClick">Click Me</Button>
+        <Button x:Name="BtnLoadClassifications" Click="OnRetrieveClassificationsButtonClick">Load Classifications</Button>
+        <Button x:Name="BtnLoadTemplates" Click="OnRetrieveTemplatesButtonClick">Load Templates</Button>
+        <Button x:Name="BtnLoadEntity" Click="OnRetrieveEntityButtonClick">Load Entity</Button>
     </StackPanel>
 </Window>

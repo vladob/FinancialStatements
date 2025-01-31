@@ -27,19 +27,19 @@ public partial class AccountingEntity
 
     public DateOnly? Cancellation { get; set; }
 
-    public string? LegalFormId { get; set; }
+    public int? LegalFormId { get; set; }
 
-    public string? SkNaceId { get; set; }
+    public int? SkNaceId { get; set; }
 
-    public string? OrganizationSizeId { get; set; }
+    public int? OrganizationSizeId { get; set; }
 
-    public string? OwnershipTypeId { get; set; }
+    public int? OwnershipTypeId { get; set; }
 
-    public string? RegionId { get; set; }
+    public int? RegionId { get; set; }
 
-    public string? DistrictId { get; set; }
+    public int? DistrictId { get; set; }
 
-    public string? RegisterredOfficeId { get; set; }
+    public int? RegisterredOfficeId { get; set; }
 
     public bool? Consolidated { get; set; }
 

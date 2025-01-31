@@ -49,6 +49,11 @@
     <ProjectReference Include="..\FsApiAccess\FsApiAccess.csproj" />
     <ProjectReference Include="..\FsDataAccess\FsDataAccess.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <None Update="appsettings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
 
   <!--
     Defining the "HasPackageAndPublishMenuAddedByProject" property here allows the Solution

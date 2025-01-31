@@ -4,6 +4,8 @@ using System.Threading.Tasks;
 using FsApiAccess.Models;
 using FsDataAccess.Models;
 using FsDataAccess.Tasks;
+using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
 namespace FsApiAccess.Services
@@ -19,6 +21,179 @@ namespace FsApiAccess.Services
             _httpClient = httpClient;
             _context = context;
             _logger = logger;
+        }
+
+        public async Task RetrieveAndStoreLegalFormsAsync()
+        {
+            var apiUrl = "https://www.registeruz.sk/cruz-public/api/pravne-formy";
+            try
+            {
+                var responseData = await _httpClient.GetFromJsonAsync<ApiClasificationResponseModel>(apiUrl);
+
+                if (responseData?.Klasifikacie != null)
+                {
+                    foreach (var item in responseData.Klasifikacie)
+                    {
+                        var entity = new LegalForm
+                        {
+                            Code = item.Kod,
+                            TitleEng = item.Nazov.En,
+                            TitleSk = item.Nazov.Sk
+                        };
+                        _context.StagingLegalForms.Add(entity);
+                    }
+                    await _context.SaveChangesAsync();
+
+                    // Call the upsert task
+                    var upsertTask = new UpsertLegalFormsTask(_context);
+                    await upsertTask.UpsertLegalFormsAsync();
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error retrieving and storing legal forms.");
+                // Handle the error (e.g., retry, notify user, etc.)
+            }
+        }
+
+        public async Task RetrieveAndStoreSkNaceAsync()
+        {
+            var apiUrl = "https://www.registeruz.sk/cruz-public/api/sk-nace";
+            try
+            {
+                var responseData = await _httpClient.GetFromJsonAsync<ApiClasificationResponseModel>(apiUrl);
+
+                if (responseData?.Klasifikacie != null)
+                {
+                    foreach (var item in responseData.Klasifikacie)
+                    {
+                        var entity = new SkNace
+                        {
+                            Code = item.Kod,
+                            TitleEng = item.Nazov.En,
+                            TitleSk = item.Nazov.Sk
+                        };
+                        _context.StagingSkNaces.Add(entity);
+                    }
+                    await _context.SaveChangesAsync();
+
+                    // Call the upsert task
+                    var upsertTask = new UpsertSkNaceTask(_context);
+                    await upsertTask.UpsertSkNaceAsync();
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error retrieving and storing SkNace.");
+                // Handle the error (e.g., retry, notify user, etc.)
+            }
+        }
+
+        public async Task RetrieveAndStoreOwnershipTypesAsync()
+        {
+            var apiUrl = "https://www.registeruz.sk/cruz-public/api/druhy-vlastnictva";
+            try
+            {
+                var responseData = await _httpClient.GetFromJsonAsync<ApiClasificationResponseModel>(apiUrl);
+
+                if (responseData?.Klasifikacie != null)
+                {
+                    foreach (var item in responseData.Klasifikacie)
+                    {
+                        var entity = new OwnershipType
+                        {
+                            //ErpId = item.Kod,
+                            Code = item.Kod,
+                            TitleEng = item.Nazov.En,
+                            TitleSk = item.Nazov.Sk
+                        };
+                        _context.StagingOwnershipTypes.Add(entity);
+                    }
+                    await _context.SaveChangesAsync();
+
+                    // Call the upsert task
+                    var upsertTask = new UpsertOwnershipTypesTask(_context);
+                    await upsertTask.UpsertOwnershipTypesAsync();
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error retrieving and storing ownership types.");
+                // Handle the error (e.g., retry, notify user, etc.)
+            }
+        }
+
+        public async Task RetrieveAndStoreOrganizationSizesAsync()
+        {
+            var apiUrl = "https://www.registeruz.sk/cruz-public/api/velkosti-organizacie";
+            try
+            {
+                var responseData = await _httpClient.GetFromJsonAsync<ApiClasificationResponseModel>(apiUrl);
+
+                if (responseData?.Klasifikacie != null)
+                {
+                    foreach (var item in responseData.Klasifikacie)
+                    {
+                        var entity = new OrganizationSize
+                        {
+                            Code = item.Kod,
+                            TitleEng = item.Nazov.En,
+                            TitleSk = item.Nazov.Sk
+                        };
+                        _context.StagingOrganizationSizes.Add(entity);
+                    }
+                    await _context.SaveChangesAsync();
+
+                    // Call the upsert task
+                    var upsertTask = new UpsertOrganizationSizesTask(_context);
+                    await upsertTask.UpsertOrganizationSizesAsync();
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error retrieving and storing organization sizes.");
+                // Handle the error (e.g., retry, notify user, etc.)
+            }
+        }
+
+        public async Task RetrieveAndStoreLocationsAllAsync()
+        {
+            await RetrieveAndStoreLocationsAsync("https://www.registeruz.sk/cruz-public/api/kraje");
+            await RetrieveAndStoreLocationsAsync("https://www.registeruz.sk/cruz-public/api/okresy");
+            await RetrieveAndStoreLocationsAsync("https://www.registeruz.sk/cruz-public/api/sidla");
+            // Call the upsert task
+            var upsertTask = new UpsertLocationsTask(_context);
+            await upsertTask.UpsertLocationsAsync();
+        }
+
+        public async Task RetrieveAndStoreLocationsAsync(string apiUrl)
+        {
+            //var apiUrl = "https://www.registeruz.sk/cruz-public/api/kraje";
+            try
+            {
+                var responseData = await _httpClient.GetFromJsonAsync<ApiClasificationResponseModel>(apiUrl);
+
+                if (responseData?.Lokacie != null)
+                {
+                    foreach (var item in responseData.Lokacie)
+                    {
+                        var entity = new Location
+                        {
+                            Code = item.Kod,
+                            TitleSk = item.Nazov.Sk,
+                            TitleEng = item.Nazov.En,
+                            ParentLocation = null
+                        };
+                        _context.StagingLocations.Add(entity);
+                    }
+                    await _context.SaveChangesAsync();
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error retrieving and storing regions.");
+                // Handle the error (e.g., retry, notify user, etc.)
+            }
         }
 
         public async Task<ApiFinancialReportTemplateModel?> RetrieveFinancialReportTemplateAsync(int templateId)
@@ -93,7 +268,7 @@ namespace FsApiAccess.Services
             try
             {
                 _context.StagingFinancialReportTemplates.Add(dbTemplate);
-//                await _context.SaveChangesAsync();
+                //                await _context.SaveChangesAsync();
             }
             catch (Exception ex)
             {
@@ -102,8 +277,8 @@ namespace FsApiAccess.Services
             }
 
             // Call the upsert task
-//            var upsertTask = new UpsertFinancialReportTemplatesTask(_context);
-//            await upsertTask.UpsertFinancialReportTemplatesAsync();
+            //            var upsertTask = new UpsertFinancialReportTemplatesTask(_context);
+            //            await upsertTask.UpsertFinancialReportTemplatesAsync();
         }
 
         public async Task RetrieveAllFinancialReportTemplatesAsync()
@@ -119,13 +294,13 @@ namespace FsApiAccess.Services
                     {
                         await StoreFinancialReportTemplateAsync(template);
                     }
-                    await SaveChanges();
+                    await SaveReportChanges();
                 }
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Error retrieving and storing all financial report templates.");
-            }         
+            }
         }
 
         public async Task RetrieveAndStoreFinancialReportTemplateAsync(int templateId)
@@ -134,15 +309,15 @@ namespace FsApiAccess.Services
             if (template != null)
             {
                 await StoreFinancialReportTemplateAsync(template);
-                await SaveChanges();
+                await SaveReportChanges();
             }
         }
 
-        public async Task SaveChanges()
+        public async Task SaveReportChanges()
         {
             try
             {
-                  await _context.SaveChangesAsync();
+                await _context.SaveChangesAsync();
             }
             catch (Exception ex)
             {
@@ -161,6 +336,45 @@ namespace FsApiAccess.Services
                 _logger.LogError(ex, "Error saving financial report template to the database.");
                 throw; // Re-throw the exception to handle it further up the call stack if needed
             }
-}   
+        }
+
+        public async Task StoreAccountingEntityAsync(ApiAccountingEntityResponseModel entity)
+        {
+            if (entity == null) return;
+
+            var dbEntity = new AccountingEntity
+            {
+                ErpId = entity.Id.ToString(),
+                Cin = entity.Ico,
+                Tin = entity.Dic,
+                Sid = entity.Sid,
+                TitleAe = entity.NazovUJ,
+                City = entity.Mesto,
+                Street = entity.Ulica,
+                Zip = entity.Psc,
+                Established = entity.DatumZalozenia,
+                Cancellation = entity.DatumZrusenia,
+                LegalFormId = await GetClassificationIdAsync(entity.PravnaForma, "LegalForms"),
+                SkNaceId = await GetClassificationIdAsync(entity.SkNace, "SkNace"),
+                OrganizationSizeId = await GetClassificationIdAsync(entity.VelkostOrganizacie, "OrganizationSizes"),
+                OwnershipTypeId = await GetClassificationIdAsync(entity.DruhVlastnictva, "OwnershipTypes"),
+                RegionId = await GetClassificationIdAsync(entity.Kraj, "Locations"),
+                DistrictId = await GetClassificationIdAsync(entity.Okres, "Locations"),
+                RegisterredOfficeId = await GetClassificationIdAsync(entity.Sidlo, "Locations"),
+                Consolidated = entity.Konsolidovana,
+                DataSource = entity.ZdrojDat,
+                LastModification = entity.DatumPoslednejUpravy
+            };
+        }
+
+        private async Task<int?> GetClassificationIdAsync(string? code, string tableName)
+        {
+            if (string.IsNullOrEmpty(code)) return null;
+
+            var query = $"SELECT Id FROM [classifications].[{tableName}] WHERE Code = @code";
+            var parameter = new SqlParameter("@code", code);
+
+            return await _context.Database.ExecuteSqlRawAsync(query, parameter);
+        }
     }
 }
