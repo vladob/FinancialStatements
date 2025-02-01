@@ -4,7 +4,7 @@
 	[cin] VARCHAR(20) NULL,
 	[tin] VARCHAR(20) NULL,
 	[sid] VARCHAR(20) NULL,
-	[titleAE] NVARCHAR(500) NOT NULL,
+	[titleAE] NVARCHAR(500) NULL,
 	[city] NVARCHAR(200) NULL,
 	[street] NVARCHAR(200) NULL,
 	[zip] VARCHAR(10) NULL,

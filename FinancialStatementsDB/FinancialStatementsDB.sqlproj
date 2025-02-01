@@ -69,6 +69,7 @@
     <Folder Include="indexing\" />
     <Folder Include="indexing\Tables\" />
     <Folder Include="Security\" />
+    <Folder Include="Templates" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="versioning\Tables\LegalFormsHistory.sql" />
@@ -111,16 +112,12 @@
     <Build Include="dbo\Tables\AnnualReportAttachments.sql" />
     <Build Include="staging\Tables\AnnualReportAttachments.sql" />
     <Build Include="versioning\Tables\FinancialReportTemplatesHistory.sql" />
-    <Build Include="dbo\Tables\FinancialReportTemplates.sql" />
     <Build Include="staging\Tables\FinancialReportTemplates.sql" />
     <Build Include="versioning\Tables\TemplateTablesHistory.sql" />
-    <Build Include="dbo\Tables\TemplateTables.sql" />
     <Build Include="staging\Tables\TemplateTables.sql" />
     <Build Include="versioning\Tables\TemplateHeadersHistory.sql" />
-    <Build Include="dbo\Tables\TemplateHeaders.sql" />
     <Build Include="staging\Tables\TemplateHeaders.sql" />
     <Build Include="versioning\Tables\TemplateRowsHistory.sql" />
-    <Build Include="dbo\Tables\TemplateRows.sql" />
     <Build Include="staging\Tables\TemplateRows.sql" />
     <Build Include="indexing\Tables\AccountingEntities_FinancialStatements.sql" />
     <Build Include="indexing\Tables\AccountingEntities_AnnualReports.sql" />
@@ -132,5 +129,13 @@
     <Build Include="Security\indexing.sql" />
     <Build Include="Security\staging.sql" />
     <Build Include="Security\versioning.sql" />
+    <Build Include="Templates\FinancialReportTemplates.sql" />
+    <Build Include="Templates\TemplateHeaders.sql" />
+    <Build Include="Templates\TemplateRows.sql" />
+    <Build Include="Templates\TemplateTables.sql" />
+    <Build Include="Security\templates.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <RefactorLog Include="FinancialStatementsDB.refactorlog" />
   </ItemGroup>
 </Project>

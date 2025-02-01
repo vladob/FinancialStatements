@@ -23,6 +23,9 @@
 
   <ItemGroup>
     <Folder Include="Cache\" />
+    <Folder Include="Configurations\Staging\" />
+    <Folder Include="Models\ReportTemplates\" />
+    <Folder Include="Models\Staging\" />
   </ItemGroup>
 
 </Project>

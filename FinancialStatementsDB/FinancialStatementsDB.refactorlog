@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Operations Version="1.0" xmlns="http://schemas.microsoft.com/sqlserver/dac/Serialization/2012/02">
+  <Operation Name="Rename Refactor" Key="0aa1e7f5-34f6-40c1-ab2e-cb48e3f45ae5" ChangeDateTime="01/31/2025 14:11:10">
+    <Property Name="ElementName" Value="[staging].[TemplateTables].[FinancialReportTemplateId]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[staging].[TemplateTables]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="FinancialReportTemplateCode" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="b1b7a58a-465d-4b17-922d-874ef9d6bcd8" ChangeDateTime="01/31/2025 14:12:37">
+    <Property Name="ElementName" Value="[staging].[TemplateTables].[Id]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[staging].[TemplateTables]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="ErpId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="db9c8930-414f-4883-9484-97c4e1e84904" ChangeDateTime="01/31/2025 14:14:38">
+    <Property Name="ElementName" Value="[staging].[TemplateTables].[FinancialReportTemplateCode]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[staging].[TemplateTables]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="[NameSk]" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="9e8b9c54-3c2c-451c-838c-6af030e3f627" ChangeDateTime="01/31/2025 14:14:45">
+    <Property Name="ElementName" Value="[staging].[TemplateTables].[[NameSk]]]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[staging].[TemplateTables]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="NameSk" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="246f7367-3897-41c6-8b69-e7beb44bbd92" ChangeDateTime="01/31/2025 14:14:49">
+    <Property Name="ElementName" Value="[staging].[TemplateTables].[name]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[staging].[TemplateTables]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="NameEn" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="f6af2482-1aac-4dce-b039-ab0a4e76479e" ChangeDateTime="01/31/2025 14:21:27">
+    <Property Name="ElementName" Value="[staging].[TemplateHeaders].[TemplateTableId]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[staging].[TemplateHeaders]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="TemplateTableErpId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="0cd3348d-4ea1-4386-9bfa-3533317f1e11" ChangeDateTime="01/31/2025 14:25:11">
+    <Property Name="ElementName" Value="[staging].[TemplateRows].[description]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[staging].[TemplateRows]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="text_sk" />
+  </Operation>
+</Operations>

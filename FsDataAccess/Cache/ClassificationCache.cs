@@ -17,7 +17,7 @@ namespace FsDataAccess.Cache
         public static async Task<ClassificationCache> LoadCacheAsync(FinancialStatementsContext context, ILogger logger)
         {
             var cache = new ClassificationCache();
-
+/*
             logger.LogInformation("Loading LegalForms...");
             cache.LegalForms = await context.LegalForms.ToDictionaryAsync(lf => lf.Code, lf => lf.Id);
             logger.LogInformation("Loaded LegalForms.");
@@ -37,7 +37,7 @@ namespace FsDataAccess.Cache
             logger.LogInformation("Loading Locations...");
             cache.Locations = await context.Locations.ToDictionaryAsync(loc => loc.Code, loc => loc.Id);
             logger.LogInformation("Loaded Locations.");
-
+*/
             return cache;
         }
     }

@@ -1,7 +1,7 @@
 ﻿CREATE TABLE [dbo].[Attachments] (
     [Id]                INT                                         NOT NULL,
     [ErpId]             INT                                         NOT NULL,
-    [FinancialReportId] INT                                         NULL,
+    [FinancialReportId] INT                                         NOT NULL,
     [name]              VARCHAR (100)                               NULL,
     [mimeType]          VARCHAR (80)                                NULL,
     [size]              BIGINT                                      NULL,

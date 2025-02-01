@@ -214,7 +214,7 @@ namespace FsApiAccess.Services
         {
             if (template == null) return;
 
-            var dbTemplate = new FinancialReportTemplate
+            var dbTemplate = new FinancialReportTemplateStaging
             {
                 ErpId = template.id,
                 Name = template.nazov,
@@ -225,7 +225,7 @@ namespace FsApiAccess.Services
 
             foreach (var table in template.tabulky)
             {
-                var templateTable = new FsDataAccess.Models.TemplateTable
+                var templateTable = new FsDataAccess.Models.TemplateTableStaging
                 {
                     NameSk = table.nazov?.Sk,
                     NameEn = table.nazov?.En,
@@ -236,7 +236,7 @@ namespace FsApiAccess.Services
 
                 foreach (var header in table.hlavicka)
                 {
-                    var templateHeader = new FsDataAccess.Models.TemplateHeader
+                    var templateHeader = new FsDataAccess.Models.TemplateHeaderStaging
                     {
                         TextSk = header.text?.Sk,
                         TextEn = header.text?.En,
@@ -251,12 +251,12 @@ namespace FsApiAccess.Services
 
                 foreach (var row in table.riadky)
                 {
-                    var templateRow = new FsDataAccess.Models.TemplateRow
+                    var templateRow = new FsDataAccess.Models.TemplateRowStaging
                     {
                         Code = row.oznacenie,
                         RowNumber = row.cisloRiadku,
-                        DescriptionSk = row.text?.Sk,
-                        DescriptionEn = row.text?.En,
+                        TextSk = row.text?.Sk,
+                        TextEn = row.text?.En,
                         TemplateTable = templateTable
                     };
                     templateTable.TemplateRows.Add(templateRow);
@@ -267,7 +267,8 @@ namespace FsApiAccess.Services
 
             try
             {
-                _context.StagingFinancialReportTemplates.Add(dbTemplate);
+                _context.FinancialReportTemplateStaging.Add(dbTemplate);
+                
                 //                await _context.SaveChangesAsync();
             }
             catch (Exception ex)
