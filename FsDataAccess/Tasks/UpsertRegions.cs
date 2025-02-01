@@ -7,9 +7,9 @@ namespace FsDataAccess.Tasks
 {
     public class UpsertRegionsTask
     {
-        private readonly FinancialStatementsContext _context;
+        private readonly TemplatesDbContext _context;
 
-        public UpsertRegionsTask(FinancialStatementsContext context)
+        public UpsertRegionsTask(TemplatesDbContext context)
         {
             _context = context;
         }

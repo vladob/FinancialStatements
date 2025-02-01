@@ -14,7 +14,7 @@ namespace FsDataAccess.Cache
         public Dictionary<string, int> SkNace { get; set; } = new Dictionary<string, int>();
         public Dictionary<string, int> Locations { get; set; } = new Dictionary<string, int>();
 
-        public static async Task<ClassificationCache> LoadCacheAsync(FinancialStatementsContext context, ILogger logger)
+        public static async Task<ClassificationCache> LoadCacheAsync(ClassificationsDbContext context, ILogger logger)
         {
             var cache = new ClassificationCache();
 /*

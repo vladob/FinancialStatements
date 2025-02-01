@@ -15,8 +15,4 @@
     <ProjectReference Include="..\FsDataAccess\FsDataAccess.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Services\" />
-  </ItemGroup>
-
 </Project>

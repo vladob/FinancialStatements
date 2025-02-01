@@ -7,9 +7,9 @@ namespace FsDataAccess.Tasks
 {
     public class UpsertOrganizationSizesTask
     {
-        private readonly FinancialStatementsContext _context;
+        private readonly ClassificationsDbContext _context;
 
-        public UpsertOrganizationSizesTask(FinancialStatementsContext context)
+        public UpsertOrganizationSizesTask(ClassificationsDbContext context)
         {
             _context = context;
         }

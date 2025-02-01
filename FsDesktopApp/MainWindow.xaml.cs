@@ -7,12 +7,14 @@ namespace FsDesktopApp
 {
     public sealed partial class MainWindow : Window
     {
-        private readonly ApiService _apiService;
+        private readonly ApiServiceClassifications _apiServiceClassifications;
+        private readonly ApiServiceTemplates _apiServiceTemplates;
 
         public MainWindow()
         {
             this.InitializeComponent();
-            _apiService = ((App)Application.Current).Host.Services.GetRequiredService<ApiService>();
+            _apiServiceClassifications = ((App)Application.Current).Host.Services.GetRequiredService<ApiServiceClassifications>();
+            _apiServiceTemplates = ((App)Application.Current).Host.Services.GetRequiredService<ApiServiceTemplates>();
         }
 
         private async void OnRetrieveClassificationsButtonClick(object sender, RoutedEventArgs e)
@@ -34,18 +36,18 @@ namespace FsDesktopApp
 
         private async Task RetrieveAndStoreClassificationsAsync()
         {
-            await _apiService.RetrieveAndStoreLegalFormsAsync();
-            await _apiService.RetrieveAndStoreSkNaceAsync();
-            await _apiService.RetrieveAndStoreOwnershipTypesAsync();
-            await _apiService.RetrieveAndStoreOrganizationSizesAsync();
-            await _apiService.RetrieveAndStoreLocationsAllAsync();
+            await _apiServiceClassifications.RetrieveAndStoreLegalFormsAsync();
+            await _apiServiceClassifications.RetrieveAndStoreSkNaceAsync();
+            await _apiServiceClassifications.RetrieveAndStoreOwnershipTypesAsync();
+            await _apiServiceClassifications.RetrieveAndStoreOrganizationSizesAsync();
+            await _apiServiceClassifications.RetrieveAndStoreLocationsAllAsync();
             
-            //            await _apiService.RetrieveAndStoreFinancialReportTemplateAsync(7);
+            //            await _apiServiceClassifications.RetrieveAndStoreFinancialReportTemplateAsync(7);
         }
 
         private async Task RetrieveAndStoreTemplatesAsync()
         {
-            await _apiService.RetrieveAllFinancialReportTemplatesAsync();
+            await _apiServiceTemplates.RetrieveAllFinancialReportTemplatesAsync();
         }
 
         private async Task RetrieveAndStoreEntityAsync()

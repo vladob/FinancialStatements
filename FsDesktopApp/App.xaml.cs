@@ -25,10 +25,10 @@ namespace FsDesktopApp
                 .ConfigureServices((context, services) =>
                 {
                     const string connectionString = "Server=.;Database=FinancialStatements;Trusted_Connection=False;User ID=vb;Password=vb;Encrypt=False;";
-                    // var connectionString = context.Configuration.GetConnectionString("FinancialStatementsDb");
+                    // var connectionString = classificationsContext.Configuration.GetConnectionString("FinancialStatementsDb");
                     services.AddApiAccessServices(connectionString);
 
-                    services.AddDbContext<FinancialStatementsContext>(options =>
+                    services.AddDbContext<TemplatesDbContext>(options =>
                         options.UseSqlServer(connectionString));
 
                     services.AddSingleton<ClassificationCache>();
@@ -43,8 +43,11 @@ namespace FsDesktopApp
         {
             await Host.StartAsync();
 
-            var context = Host.Services.GetRequiredService<FinancialStatementsContext>();
-            await context.InitializeAsync();
+            var classificationsContext = Host.Services.GetRequiredService<ClassificationsDbContext>();
+            await classificationsContext.InitializeAsync();
+
+            var templatesContext = Host.Services.GetRequiredService<TemplatesDbContext>();
+//            await templatesContext.InitializeAsync();
 
             var window = Host.Services.GetRequiredService<MainWindow>();
             window.Activate();

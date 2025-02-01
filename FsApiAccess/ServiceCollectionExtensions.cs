@@ -11,11 +11,11 @@ namespace FsApiAccess
     {
         public static IServiceCollection AddApiAccessServices(this IServiceCollection services, string connectionString)
         {
-            services.AddDbContext<FinancialStatementsContext>(options =>
+            services.AddDbContext<TemplatesDbContext>(options =>
                 options.UseSqlServer(connectionString));
 
-            services.AddHttpClient<ApiService>(); // Ensure ApiService is defined and accessible
-            services.AddTransient<ApiService>();
+            services.AddHttpClient<ApiServiceClassifications>(); // Ensure ApiServiceClassifications is defined and accessible
+            services.AddTransient<ApiServiceClassifications>();
 
             return services;
         }
