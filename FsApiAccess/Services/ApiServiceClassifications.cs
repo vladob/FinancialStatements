@@ -34,7 +34,7 @@ namespace FsApiAccess.Services
                 {
                     foreach (var item in responseData.Klasifikacie)
                     {
-                        var entity = new LegalForm
+                        var entity = new LegalFormStaging
                         {
                             Code = item.Kod,
                             TitleEng = item.Nazov.En,
@@ -67,7 +67,7 @@ namespace FsApiAccess.Services
                 {
                     foreach (var item in responseData.Klasifikacie)
                     {
-                        var entity = new SkNace
+                        var entity = new SkNaceStaging
                         {
                             Code = item.Kod,
                             TitleEng = item.Nazov.En,
@@ -100,7 +100,7 @@ namespace FsApiAccess.Services
                 {
                     foreach (var item in responseData.Klasifikacie)
                     {
-                        var entity = new OwnershipType
+                        var entity = new OwnershipTypeStaging
                         {
                             //ErpId = item.Kod,
                             Code = item.Kod,
@@ -134,7 +134,7 @@ namespace FsApiAccess.Services
                 {
                     foreach (var item in responseData.Klasifikacie)
                     {
-                        var entity = new OrganizationSize
+                        var entity = new OrganizationSizeStaging
                         {
                             Code = item.Kod,
                             TitleEng = item.Nazov.En,
@@ -177,7 +177,7 @@ namespace FsApiAccess.Services
                 {
                     foreach (var item in responseData.Lokacie)
                     {
-                        var entity = new Location
+                        var entity = new LocationStaging
                         {
                             Code = item.Kod,
                             TitleSk = item.Nazov.Sk,

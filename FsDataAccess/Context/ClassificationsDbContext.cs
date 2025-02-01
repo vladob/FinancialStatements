@@ -45,11 +45,11 @@ public partial class ClassificationsDbContext : DbContext
     public virtual DbSet<SkNace> SkNaces { get; set; }
 */
     // Staging tables
-    public DbSet<LegalForm> StagingLegalForms { get; set; }
-    public DbSet<Location> StagingLocations { get; set; }
-    public DbSet<OrganizationSize> StagingOrganizationSizes { get; set; }
-    public DbSet<OwnershipType> StagingOwnershipTypes { get; set; }
-    public DbSet<SkNace> StagingSkNaces { get; set; }
+    public DbSet<LegalFormStaging> StagingLegalForms { get; set; }
+    public DbSet<LocationStaging> StagingLocations { get; set; }
+    public DbSet<OrganizationSizeStaging> StagingOrganizationSizes { get; set; }
+    public DbSet<OwnershipTypeStaging> StagingOwnershipTypes { get; set; }
+    public DbSet<SkNaceStaging> StagingSkNaces { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
@@ -62,15 +62,16 @@ public partial class ClassificationsDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        base.OnModelCreating(modelBuilder);
         // Apply main table configurations
-/*
-        modelBuilder.ApplyConfiguration(new LegalFormConfiguration("Classifications"));
-        modelBuilder.ApplyConfiguration(new LocationConfiguration("Classifications"));
-        modelBuilder.ApplyConfiguration(new OrganizationSizeConfiguration("Classifications"));
-        modelBuilder.ApplyConfiguration(new OwnershipTypeConfiguration("Classifications"));
-        modelBuilder.ApplyConfiguration(new SkNaceConfiguration("Classifications"));
+        /*
+                modelBuilder.ApplyConfiguration(new LegalFormConfiguration("Classifications"));
+                modelBuilder.ApplyConfiguration(new LocationConfiguration("Classifications"));
+                modelBuilder.ApplyConfiguration(new OrganizationSizeConfiguration("Classifications"));
+                modelBuilder.ApplyConfiguration(new OwnershipTypeConfiguration("Classifications"));
+                modelBuilder.ApplyConfiguration(new SkNaceConfiguration("Classifications"));
 
-*/
+        */
         // Apply staging table configurations
         modelBuilder.ApplyConfiguration(new LegalFormStagingConfiguration());
         modelBuilder.ApplyConfiguration(new LocationStagingConfiguration());

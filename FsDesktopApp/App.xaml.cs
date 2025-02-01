@@ -7,6 +7,7 @@ using FsDataAccess.Cache;
 using FsDataAccess.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
+using FsApiAccess.Services;
 
 namespace FsDesktopApp
 {
@@ -28,12 +29,14 @@ namespace FsDesktopApp
                     // var connectionString = classificationsContext.Configuration.GetConnectionString("FinancialStatementsDb");
                     services.AddApiAccessServices(connectionString);
 
-                    services.AddDbContext<TemplatesDbContext>(options =>
-                        options.UseSqlServer(connectionString));
+                    services.AddDbContext<ClassificationsDbContext>(options => options.UseSqlServer(connectionString));
+
+                    services.AddDbContext<TemplatesDbContext>(options => options.UseSqlServer(connectionString));
 
                     services.AddSingleton<ClassificationCache>();
 
                     // Register other services and view models
+                    services.AddTransient<ApiServiceTemplates>();
                     services.AddTransient<MainWindow>();
                 })
                 .Build();
