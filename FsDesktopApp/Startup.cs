@@ -15,7 +15,7 @@ namespace FsDesktopApp
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddHttpClient();
-            services.AddDbContext<ClassificationsDbContext>(options =>
+            services.AddDbContext<DboContext>(options =>
                 options.UseSqlServer("Server=.;Database=FinancialStatements;Trusted_Connection=False;User ID=vb;Password=vb;Encrypt=False;"));
             services.AddTransient<ApiServiceClassifications>();
             services.AddTransient<ApiServiceEntities>();

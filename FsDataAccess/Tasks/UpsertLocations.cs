@@ -7,9 +7,9 @@ namespace FsDataAccess.Tasks
 {
     public class UpsertLocationsTask
     {
-        private readonly ClassificationsDbContext _context;
+        private readonly DboContext _context;
 
-        public UpsertLocationsTask(ClassificationsDbContext context)
+        public UpsertLocationsTask(DboContext context)
         {
             _context = context;
         }

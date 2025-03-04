@@ -7,9 +7,9 @@ namespace FsDataAccess.Tasks
 {
     public class UpsertOwnershipTypesTask
     {
-        private readonly ClassificationsDbContext _context;
+        private readonly DboContext _context;
 
-        public UpsertOwnershipTypesTask(ClassificationsDbContext context)
+        public UpsertOwnershipTypesTask(DboContext context)
         {
             _context = context;
         }

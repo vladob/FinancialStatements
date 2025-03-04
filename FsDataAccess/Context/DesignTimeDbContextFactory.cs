@@ -7,11 +7,11 @@ using System.IO;
 
 namespace FsDataAccess.Models
 {
-    public class DesignTimeDbContextFactory : IDesignTimeDbContextFactory<TemplatesDbContext>
+    public class DesignTimeDbContextFactory : IDesignTimeDbContextFactory<DboContext>
     {
-        public TemplatesDbContext CreateDbContext(string[] args)
+        public DboContext CreateDbContext(string[] args)
         {
-            var optionsBuilder = new DbContextOptionsBuilder<TemplatesDbContext>();
+            var optionsBuilder = new DbContextOptionsBuilder<DboContext>();
 
             // Adjust the path to your appsettings.json file as needed
             IConfigurationRoot configuration = new ConfigurationBuilder()
@@ -22,7 +22,7 @@ namespace FsDataAccess.Models
             var connectionString = configuration.GetConnectionString("FinancialStatementsDb");
             optionsBuilder.UseSqlServer(connectionString);
 
-            return new TemplatesDbContext(optionsBuilder.Options, configuration, null);
+            return new DboContext(optionsBuilder.Options, configuration, null);
         }
     }
 }

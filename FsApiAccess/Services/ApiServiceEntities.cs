@@ -13,12 +13,12 @@ namespace FsApiAccess.Services
     public class ApiServiceEntities
     {
         private readonly HttpClient _httpClient;
-        private readonly ClassificationsDbContext _classificationsContext;
+        private readonly DboContext _classificationsContext;
         private readonly DboContext _dboContext;
 
         private readonly ILogger<ApiServiceClassifications> _logger;
 
-        public ApiServiceEntities(HttpClient httpClient, ClassificationsDbContext classificationsContext, ILogger<ApiServiceClassifications> logger)
+        public ApiServiceEntities(HttpClient httpClient, DboContext classificationsContext, ILogger<ApiServiceClassifications> logger)
         {
             _httpClient = httpClient;
             _classificationsContext = classificationsContext;

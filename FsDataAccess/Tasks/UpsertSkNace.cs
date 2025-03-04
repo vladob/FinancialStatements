@@ -7,9 +7,9 @@ namespace FsDataAccess.Tasks
 {
     public class UpsertSkNaceTask
     {
-        private readonly ClassificationsDbContext _context;
+        private readonly DboContext _context;
 
-        public UpsertSkNaceTask(ClassificationsDbContext context)
+        public UpsertSkNaceTask(DboContext context)
         {
             _context = context;
         }

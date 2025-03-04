@@ -8,10 +8,10 @@ namespace FsDataAccess.Tasks
 {
     public class UpsertFinancialReportTemplatesTask
     {
-        private readonly TemplatesDbContext _context;
+        private readonly DboContext _context;
         private readonly ILogger<UpsertFinancialReportTemplatesTask> _logger;
 
-        public UpsertFinancialReportTemplatesTask(TemplatesDbContext context)
+        public UpsertFinancialReportTemplatesTask(DboContext context)
         {
             _context = context;
         }

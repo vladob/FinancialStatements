@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace FsDataAccess.Migrations
 {
-    [DbContext(typeof(TemplatesDbContext))]
+    [DbContext(typeof(DboContext))]
     [Migration("20250128164227_InitialCreate")]
     partial class InitialCreate
     {

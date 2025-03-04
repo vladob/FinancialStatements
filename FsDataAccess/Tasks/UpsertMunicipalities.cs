@@ -7,9 +7,9 @@ namespace FsDataAccess.Tasks
 {
     public class UpsertMunicipalitiesTask
     {
-        private readonly TemplatesDbContext _context;
+        private readonly DboContext _context;
 
-        public UpsertMunicipalitiesTask(TemplatesDbContext context)
+        public UpsertMunicipalitiesTask(DboContext context)
         {
             _context = context;
         }

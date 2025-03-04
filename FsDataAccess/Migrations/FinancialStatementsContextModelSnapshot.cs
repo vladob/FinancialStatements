@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace FsDataAccess.Migrations
 {
-    [DbContext(typeof(TemplatesDbContext))]
+    [DbContext(typeof(DboContext))]
     partial class FinancialStatementsContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

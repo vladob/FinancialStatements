@@ -15,10 +15,10 @@ namespace FsApiAccess.Services
     public class ApiServiceClassifications
     {
         private readonly HttpClient _httpClient;
-        private readonly ClassificationsDbContext _context;
+        private readonly DboContext _context;
         private readonly ILogger<ApiServiceClassifications> _logger;
 
-        public ApiServiceClassifications(HttpClient httpClient, ClassificationsDbContext context, ILogger<ApiServiceClassifications> logger)
+        public ApiServiceClassifications(HttpClient httpClient, DboContext context, ILogger<ApiServiceClassifications> logger)
         {
             _httpClient = httpClient;
             _context = context;

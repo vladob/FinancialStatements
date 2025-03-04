@@ -13,10 +13,10 @@ namespace FsApiAccess.Services
     public class ApiServiceTemplates
     {
         private readonly HttpClient _httpClient;
-        private readonly TemplatesDbContext _context;
+        private readonly DboContext _context;
         private readonly ILogger<ApiServiceTemplates> _logger;
 
-        public ApiServiceTemplates(HttpClient httpClient, TemplatesDbContext context, ILogger<ApiServiceTemplates> logger)
+        public ApiServiceTemplates(HttpClient httpClient, DboContext context, ILogger<ApiServiceTemplates> logger)
         {
             _httpClient = httpClient;
             _context = context;

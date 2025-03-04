@@ -7,9 +7,9 @@ namespace FsDataAccess.Tasks
 {
     public class UpsertLegalFormsTask
     {
-        private readonly ClassificationsDbContext _context;
+        private readonly DboContext _context;
 
-        public UpsertLegalFormsTask(ClassificationsDbContext context)
+        public UpsertLegalFormsTask(DboContext context)
         {
             _context = context;
         }

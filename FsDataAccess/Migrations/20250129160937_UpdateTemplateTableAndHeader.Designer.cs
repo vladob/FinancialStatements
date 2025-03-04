@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace FsDataAccess.Migrations
 {
-    [DbContext(typeof(TemplatesDbContext))]
+    [DbContext(typeof(DboContext))]
     [Migration("20250129160937_UpdateTemplateTableAndHeader")]
     partial class UpdateTemplateTableAndHeader
     {

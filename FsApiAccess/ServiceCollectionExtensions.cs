@@ -11,7 +11,7 @@ namespace FsApiAccess
     {
         public static IServiceCollection AddApiAccessServices(this IServiceCollection services, string connectionString)
         {
-            services.AddDbContext<TemplatesDbContext>(options =>
+            services.AddDbContext<DboContext>(options =>
                 options.UseSqlServer(connectionString));
 
             services.AddHttpClient<ApiServiceClassifications>(); // Ensure ApiServiceClassifications is defined and accessible
