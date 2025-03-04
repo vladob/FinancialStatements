@@ -25,7 +25,7 @@ namespace FsDesktopApp
 
         private async void OnRetrieveTemplatesButtonClick(object sender, RoutedEventArgs e)
         {
-            await RetrieveAndStoreClassificationsAsync();
+            await RetrieveAndStoreTemplatesAsync();
             // Update UI to reflect data retrieval
         }
         private async void OnRetrieveEntityButtonClick(object sender, RoutedEventArgs e)

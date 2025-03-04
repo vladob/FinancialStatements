@@ -5,4 +5,6 @@
     [text_sk]           VARCHAR (MAX)       NULL,       -- API: text.sk, (slovak) a description of the line, the object where key is the localization and the value is a string
     [text_en]           VARCHAR (MAX)       NULL,       -- API: text.en, (english) a description of the line, the object where key is the localization and the value is a string
     [designation]       NVARCHAR(100)       NULL        -- API: oznacenie, typically special code of the line
+, 
+    CONSTRAINT [PK_TemplateRowsStaging] PRIMARY KEY ([Id])
 );

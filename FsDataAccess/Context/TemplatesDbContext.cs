@@ -66,9 +66,9 @@ public partial class TemplatesDbContext : DbContext
 
         // Apply staging table configurations
         modelBuilder.ApplyConfiguration(new FinancialReportTemplateStagingConfiguration());
+        modelBuilder.ApplyConfiguration(new TemplateTableStagingConfiguration());
         modelBuilder.ApplyConfiguration(new TemplateHeaderStagingConfiguration());
         modelBuilder.ApplyConfiguration(new TemplateRowStagingConfiguration());
-        modelBuilder.ApplyConfiguration(new TemplateTableStagingConfiguration());
 
         OnModelCreatingPartial(modelBuilder);
     }

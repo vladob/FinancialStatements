@@ -6,7 +6,7 @@ namespace FsDataAccess.Models;
 public partial class TemplateTableStaging
 {
     public int Id { get; set; }
-    public int? FinancialReportTemplateId { get; set; }
+    public int? FinancialReportTemplateErpId { get; set; }
     public string? NameSk { get; set; }
     public string? NameEn { get; set; }
     public int? NumberOfDataColumns { get; set; }

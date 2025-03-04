@@ -12,12 +12,14 @@ namespace FsDataAccess.Configurations
 
         public void Configure(EntityTypeBuilder<TemplateRowStaging> entity)
         {
+            entity.HasKey(e => e.Id).HasName("PK_TemplateRowsStaging");
+
             entity.ToTable("TemplateRows", "staging");
 
             entity.Property(e => e.RowNumber).HasColumnName("rowNumber");
-            entity.Property(e => e.TextSk).IsUnicode(false).HasColumnName("text_sk");
-            entity.Property(e => e.TextEn).IsUnicode(false).HasColumnName("text_en");
-            entity.Property(e => e.Code).IsUnicode(false).HasColumnName("code");
+            entity.Property(e => e.TextSk).IsUnicode(false).HasColumnName("textSk");
+            entity.Property(e => e.TextEn).IsUnicode(false).HasColumnName("textEn");
+            entity.Property(e => e.Designation).IsUnicode(false).HasColumnName("designation");
 
         }
     }

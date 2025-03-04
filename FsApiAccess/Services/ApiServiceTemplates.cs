@@ -80,7 +80,7 @@ namespace FsApiAccess.Services
                 {
                     var templateRow = new FsDataAccess.Models.TemplateRowStaging
                     {
-                        Code = row.oznacenie,
+                        Designation = row.oznacenie,
                         RowNumber = row.cisloRiadku,
                         TextSk = row.text?.Sk,
                         TextEn = row.text?.En,

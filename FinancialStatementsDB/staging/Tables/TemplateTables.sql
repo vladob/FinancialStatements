@@ -5,6 +5,6 @@
     [NameEn]                        VARCHAR(100)        NULL,       -- API: (english) name of table, the object where key is the localization and the value is a string
     [NumberOfColumns]               INT                 NULL,       -- API: pocetStlpcov (not in API documentation, but is reutrned in API)
     [NumberOfDataColumns]           INT                 NULL,       -- API: pocetDatovychStlpcov (not in API documentation, but is reutrned in API)
-    CONSTRAINT [PK_TemplateTables] PRIMARY KEY ([Id]), 
+    CONSTRAINT [PK_TemplateTablesStaging] PRIMARY KEY ([Id]), 
     CONSTRAINT [FK_TemplateTables_FinancialReportTemplates] FOREIGN KEY ([FinancialReportTemplateErpId]) REFERENCES [staging].[FinancialReportTemplates] (ErpId),
 );

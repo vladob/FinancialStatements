@@ -5,6 +5,7 @@ namespace FsDataAccess.Models;
 
 public partial class TemplateHeaderStaging
 {
+    public int Id { get; set; }
     public int? RowPosition { get; set; }
     public int? ColumnPosition { get; set; }
     public string? TextSk { get; set; }

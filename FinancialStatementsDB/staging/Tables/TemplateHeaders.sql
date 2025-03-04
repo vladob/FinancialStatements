@@ -7,6 +7,6 @@
     [columnSpan]      INT           NULL,       -- API: sirkaStlpca - number of columns, number
     [textEn]          VARCHAR (MAX) NULL,       -- API: (english) description of the column, the object where key is the localization and the value is a string
     [textSk]          VARCHAR (MAX) NULL,       -- API: (slovak) description of the column, the object where key is the localization and the value is a string
-    CONSTRAINT [PK_TemplateHeaders] PRIMARY KEY ([Id]),
+    CONSTRAINT [PK_TemplateHeadersStaging] PRIMARY KEY ([Id]),
     CONSTRAINT [FK_TemplateHeaders_TemplateTables] FOREIGN KEY ([TemplateTableId]) REFERENCES [staging].[TemplateTables] (Id),
 );

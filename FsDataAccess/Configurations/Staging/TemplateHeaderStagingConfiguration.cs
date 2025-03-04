@@ -12,6 +12,8 @@ namespace FsDataAccess.Configurations
 
         public void Configure(EntityTypeBuilder<TemplateHeaderStaging> entity)
         {
+            entity.HasKey(e => e.Id).HasName("PK_TemplateHeadersStaging");
+
             entity.ToTable("TemplateHeaders", "staging");
 
             entity.Property(e => e.RowPosition).HasColumnName("rowPosition");

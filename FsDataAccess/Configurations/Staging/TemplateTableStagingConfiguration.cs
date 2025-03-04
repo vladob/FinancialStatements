@@ -13,8 +13,11 @@ namespace FsDataAccess.Configurations
 
         public void Configure(EntityTypeBuilder<TemplateTableStaging> entity)
         {
+            entity.HasKey(e => e.Id).HasName("PK_TemplateTablesStaging");
+
             entity.ToTable("TemplateTables", "staging");
 
+            entity.Property(e => e.FinancialReportTemplateErpId).HasColumnName("FinancialReportTemplateErpId");
             entity.Property(e => e.NameSk).HasMaxLength(100).IsUnicode(false).HasColumnName("nameSk");
             entity.Property(e => e.NameEn).HasMaxLength(100).IsUnicode(false).HasColumnName("nameEn");
             entity.Property(e => e.NumberOfColumns).HasMaxLength(100).IsUnicode(false).HasColumnName("NumberOfColumns");
