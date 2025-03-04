@@ -10,23 +10,23 @@ using Microsoft.Extensions.Logging;
 
 namespace FsDataAccess.Models;
 
-public partial class DboDbContext : DbContext
+public partial class DboContext : DbContext
 {
     private readonly IConfiguration _configuration;
     private readonly ILogger _logger;
 
-    public DboDbContext(DbContextOptions<DboDbContext> options, IConfiguration configuration, ILogger<DboDbContext> logger)
+    public DboContext(DbContextOptions<DboContext> options, IConfiguration configuration, ILogger<DboContext> logger)
         : base(options)
     {
         _configuration = configuration;
         _logger = logger;
     }
 
-    public DboDbContext()
+    public DboContext()
     {
     }
 
-    public DboDbContext(DbContextOptions<DboDbContext> options)
+    public DboContext(DbContextOptions<DboContext> options)
         : base(options)
     {
         // Initialize _configuration with a default value or throw an exception
@@ -43,7 +43,7 @@ public partial class DboDbContext : DbContext
     public virtual DbSet<ReportTable> ReportTables { get; set; }
 */
     // Staging tables
-      public DbSet<AccountingEntity> StagingAccountingEntities { get; set; }
+      public DbSet<AccountingEntityStaging> StagingAccountingEntities { get; set; }
       public DbSet<AnnualReport> StagingAnnualReports { get; set; }
       public DbSet<AnnualReportAttachment> StagingAnnualReportAttachments { get; set; }
       public DbSet<Attachment> StagingAttachments { get; set; }

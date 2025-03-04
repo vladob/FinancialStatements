@@ -18,6 +18,7 @@ namespace FsDesktopApp
             services.AddDbContext<ClassificationsDbContext>(options =>
                 options.UseSqlServer("Server=.;Database=FinancialStatements;Trusted_Connection=False;User ID=vb;Password=vb;Encrypt=False;"));
             services.AddTransient<ApiServiceClassifications>();
+            services.AddTransient<ApiServiceEntities>();
             // ... register other services
         }
     }

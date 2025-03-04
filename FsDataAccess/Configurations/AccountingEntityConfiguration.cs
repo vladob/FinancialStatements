@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace FsDataAccess.Configurations
 {
-    public class AccountingEntityConfiguration : IEntityTypeConfiguration<AccountingEntity>
+    public class AccountingEntityConfiguration : IEntityTypeConfiguration<AccountingEntityStaging>
     {
         private readonly string _schema;
         private readonly bool _useHistoryTable;
@@ -15,7 +15,7 @@ namespace FsDataAccess.Configurations
             _useHistoryTable = useHistoryTable;
         }
 
-        public void Configure(EntityTypeBuilder<AccountingEntity> entity)
+        public void Configure(EntityTypeBuilder<AccountingEntityStaging> entity)
         {
             entity.ToTable("AccountingEntities", _schema);
 
@@ -93,7 +93,7 @@ namespace FsDataAccess.Configurations
                         .HasForeignKey("AnnualReportId")
                         .OnDelete(DeleteBehavior.ClientSetNull)
                         .HasConstraintName("FK__Accountin__Annua__5B0E7E4A"),
-                    l => l.HasOne<AccountingEntity>().WithMany()
+                    l => l.HasOne<AccountingEntityStaging>().WithMany()
                         .HasForeignKey("AccountingEntityId")
                         .OnDelete(DeleteBehavior.ClientSetNull)
                         .HasConstraintName("FK__Accountin__Accou__5A1A5A11"),
@@ -110,7 +110,7 @@ namespace FsDataAccess.Configurations
                         .HasForeignKey("FinancialStatementId")
                         .OnDelete(DeleteBehavior.ClientSetNull)
                         .HasConstraintName("FK__Accountin__Finan__573DED66"),
-                    l => l.HasOne<AccountingEntity>().WithMany()
+                    l => l.HasOne<AccountingEntityStaging>().WithMany()
                         .HasForeignKey("AccountingEntityId")
                         .OnDelete(DeleteBehavior.ClientSetNull)
                         .HasConstraintName("FK__Accountin__Accou__5649C92D"),

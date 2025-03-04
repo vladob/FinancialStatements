@@ -37,5 +37,5 @@ public partial class AnnualReport
 
     public virtual ICollection<FinancialReport> FinancialReports { get; set; } = new List<FinancialReport>();
 
-    public virtual ICollection<AccountingEntity> AccountingEntities { get; set; } = new List<AccountingEntity>();
+    public virtual ICollection<AccountingEntityStaging> AccountingEntities { get; set; } = new List<AccountingEntityStaging>();
 }
