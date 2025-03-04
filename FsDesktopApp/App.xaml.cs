@@ -1,60 +1,25 @@
-using Microsoft.UI.Xaml;
-using FsApiAccess;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Configuration;
-using FsDataAccess.Cache;
-using FsDataAccess.Models;
-using Microsoft.EntityFrameworkCore;
-using System.Threading.Tasks;
-using FsApiAccess.Services;
+﻿using Microsoft.Extensions.DependencyInjection;
+using System.Configuration;
+using System.Data;
+using System.Windows;
 
-namespace FsDesktopApp
+namespace FsDesktopApp;
+
+/// <summary>
+/// Interaction logic for App.xaml
+/// </summary>
+public partial class App : Application
 {
-    public partial class App : Application
+    public static IServiceProvider ServiceProvider { get; private set; }
+
+    protected override void OnStartup(StartupEventArgs e)
     {
-        public IHost Host { get; }
+        var startup = new Startup();
+        var services = new ServiceCollection();
+        startup.ConfigureServices(services);
+        ServiceProvider = services.BuildServiceProvider();
 
-        public App()
-        {
-            this.InitializeComponent();
-            Host = Microsoft.Extensions.Hosting.Host.CreateDefaultBuilder()
-                .ConfigureAppConfiguration((context, config) =>
-                {
-                    config.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
-                })
-                .ConfigureServices((context, services) =>
-                {
-                    const string connectionString = "Server=.;Database=FinancialStatements;Trusted_Connection=False;User ID=vb;Password=vb;Encrypt=False;";
-                    // var connectionString = classificationsContext.Configuration.GetConnectionString("FinancialStatementsDb");
-                    services.AddApiAccessServices(connectionString);
-
-                    services.AddDbContext<ClassificationsDbContext>(options => options.UseSqlServer(connectionString));
-
-                    services.AddDbContext<TemplatesDbContext>(options => options.UseSqlServer(connectionString));
-
-                    services.AddSingleton<ClassificationCache>();
-
-                    // Register other services and view models
-                    services.AddTransient<ApiServiceTemplates>();
-                    services.AddTransient<MainWindow>();
-                })
-                .Build();
-        }
-
-        protected override async void OnLaunched(LaunchActivatedEventArgs args)
-        {
-            await Host.StartAsync();
-
-            var classificationsContext = Host.Services.GetRequiredService<ClassificationsDbContext>();
-            await classificationsContext.InitializeAsync();
-
-            var templatesContext = Host.Services.GetRequiredService<TemplatesDbContext>();
-//            await templatesContext.InitializeAsync();
-
-            var window = Host.Services.GetRequiredService<MainWindow>();
-            window.Activate();
-        }
+        base.OnStartup(e);
     }
 }
 

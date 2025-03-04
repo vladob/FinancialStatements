@@ -7,6 +7,8 @@ using FsDataAccess.Tasks;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using Microsoft.Identity.Client;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace FsApiAccess.Services
 {
@@ -166,7 +168,7 @@ namespace FsApiAccess.Services
             await upsertTask.UpsertLocationsAsync();
         }
 
-        public async Task RetrieveAndStoreLocationsAsync(string apiUrl)
+        private async Task RetrieveAndStoreLocationsAsync(string apiUrl)
         {
             //var apiUrl = "https://www.registeruz.sk/cruz-public/api/kraje";
             try
@@ -191,7 +193,7 @@ namespace FsApiAccess.Services
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error retrieving and storing regions.");
+                _logger.LogError(ex, "Error retrieving and storing locations.");
                 // Handle the error (e.g., retry, notify user, etc.)
             }
         }
@@ -206,6 +208,68 @@ namespace FsApiAccess.Services
             catch (Exception ex)
             {
                 _logger.LogError(ex, $"Error retrieving financial report template with ID {templateId}.");
+                return null;
+            }
+        }
+
+        public enum SearchBy
+        {
+            Cin,
+            TaxId,
+            LegalForm
+        }
+
+        public async Task<List<int>> RetrieveAndStoreEntityIdAsync(SearchBy searchBy, string searchValue)
+        {
+            return await RetrieveAndStoreEntityIdAsync(searchBy, searchValue, "2000-01-01");
+        }
+        public async Task<List<int>> RetrieveAndStoreEntityIdAsync(SearchBy searchBy, string searchValue, string changesFrom)
+        {
+            string apiUrl = "";
+            var ids = new List<int>();
+            switch (searchBy)
+            {
+                case SearchBy.Cin: 
+                    apiUrl = $"https://www.registeruz.sk/cruz-public/api/uctovne-jednotky?zmenene-od={changesFrom}&ico={searchValue}";
+                    break;
+                case SearchBy.TaxId:
+                    apiUrl = $"https://www.registeruz.sk/cruz-public/api/uctovne-jednotky?zmenene-od={changesFrom}&dic={searchValue}";
+                    break;
+                case SearchBy.LegalForm:
+                    apiUrl = $"https://www.registeruz.sk/cruz-public/api/uctovne-jednotky?zmenene-od={changesFrom}&pravna-forma={searchValue}";
+                    break;
+            }
+
+            try
+            {
+                var responseData = await _httpClient.GetFromJsonAsync<ApiAccountingEntitieIdsResponseModel>(apiUrl);
+                ids = new List<int>();
+                if (responseData?.id != null)
+                {
+                    ids.AddRange(responseData.id);
+                }
+                int count = 0; // temporarely, for breakepoint
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error retrieving and storing legal forms.");
+                // Handle the error (e.g., retry, notify user, etc.)
+            }
+            return ids;
+        }
+
+        public async Task<ApiAccountingEntityResponseModel?> RetrieveAccountingEntityDetailsAsync(int entityId)
+        {
+            var apiUrl = $"https://www.registeruz.sk/cruz-public/api/uctovna-jednotka?id={entityId}"; 
+
+            try
+            {
+                var responseData = await _httpClient.GetFromJsonAsync<ApiAccountingEntityResponseModel>(apiUrl);
+                return responseData;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, $"Error retrieving details for accounting entity with ID { entityId}");
                 return null;
             }
         }

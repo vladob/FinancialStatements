@@ -9,7 +9,6 @@ namespace FsApiAccess.Models
     {
         public string Kod { get; set; }
         public Nazov Nazov { get; set; }
-        public string NadriadenaKlasifikacia { get; internal set; }
     }
     public class Lokacia
     {
@@ -57,6 +56,14 @@ namespace FsApiAccess.Models
         public Nazov? text { get; set; }
         public string? oznacenie { get; set; }
     }
+
+    public class ApiAccountingEntitieIdsResponseModel
+    {
+        public List<int> id { get; set; } = new List<int>();
+        Boolean existujeDalsieId { get; set; }
+    }
+
+
     public class ApiAccountingEntityResponseModel
     {
         public int Id { get; set; } // identifier of the accounting entity

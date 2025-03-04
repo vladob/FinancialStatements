@@ -1,17 +1,21 @@
-<?xml version="1.0" encoding="utf-8"?>
-<Window
-    x:Class="FsDesktopApp.MainWindow"
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:FsDesktopApp"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d"
-    Title="FsDesktopApp">
+﻿<Window x:Class="FsDesktopApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:FsDesktopApp"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="51*"/>
+            <ColumnDefinition Width="149*"/>
+        </Grid.ColumnDefinitions>
+        <Button x:Name="btnRetrieveClassifications" Content="Retrieve Classifications" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="24" Width="140" Click="btnRetrieveClassifications_Click"/>
+        <Button x:Name="btnRetrieveTemplates" Content="Retrieve Templates" HorizontalAlignment="Left" Margin="10,39,0,0" VerticalAlignment="Top" Height="24" Width="140" Click="btnRetrieveTemplates_Click"/>
+        <Button x:Name="btnRetrieveEntity" Content="Retrieve Entity" HorizontalAlignment="Left" Margin="10,91,0,0" VerticalAlignment="Top" Height="24" Width="140" Click="btnRetrieveEntity_Click"/>
+        <TextBox x:Name="EntityCin" HorizontalAlignment="Left" Margin="10,68,0,0" TextWrapping="Wrap" Text="36206075" VerticalAlignment="Top" Width="140"/>
+        <Label x:Name="AccountingEntityId" Content="EntityId" HorizontalAlignment="Left" Margin="10,120,0,0" VerticalAlignment="Top" Width="140"/>
 
-    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-        <Button x:Name="BtnLoadClassifications" Click="OnRetrieveClassificationsButtonClick">Load Classifications</Button>
-        <Button x:Name="BtnLoadTemplates" Click="OnRetrieveTemplatesButtonClick">Load Templates</Button>
-        <Button x:Name="BtnLoadEntity" Click="OnRetrieveEntityButtonClick">Load Entity</Button>
-    </StackPanel>
+    </Grid>
 </Window>
