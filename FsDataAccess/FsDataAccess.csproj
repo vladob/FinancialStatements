@@ -19,11 +19,11 @@
     </PackageReference>
     <PackageReference Include="Microsoft.Extensions.Configuration.FileExtensions" Version="9.0.1" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="9.0.1" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="9.0.2" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Cache\" />
-    <Folder Include="Configurations\Staging\" />
     <Folder Include="Models\ReportTemplates\" />
   </ItemGroup>
 

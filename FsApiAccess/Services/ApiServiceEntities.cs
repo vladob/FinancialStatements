@@ -1,5 +1,6 @@
 ﻿using FsApiAccess.Models;
 using FsDataAccess.Models;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -13,15 +14,13 @@ namespace FsApiAccess.Services
     public class ApiServiceEntities
     {
         private readonly HttpClient _httpClient;
-        private readonly DboContext _classificationsContext;
         private readonly DboContext _dboContext;
-
         private readonly ILogger<ApiServiceClassifications> _logger;
 
         public ApiServiceEntities(HttpClient httpClient, DboContext classificationsContext, ILogger<ApiServiceClassifications> logger)
         {
             _httpClient = httpClient;
-            _classificationsContext = classificationsContext;
+            _dboContext = classificationsContext;
             _logger = logger;
         }
 
@@ -93,7 +92,7 @@ namespace FsApiAccess.Services
             {
                 var entity = new AccountingEntityStaging
                 {
-                    ErpId = entityDetails.Id.ToString(),
+                    ErpId = entityDetails.Id,
                     Cin = entityDetails.Ico,
                     Tin = entityDetails.Dic,
                     Sid = entityDetails.Sid,
@@ -114,6 +113,25 @@ namespace FsApiAccess.Services
                     DataSource = entityDetails.ZdrojDat,
                     LastModification = entityDetails.DatumPoslednejUpravy
                 };
+/*
+                if (entityDetails.IdUctovnychZavierok != null)
+                {
+                    foreach (int item in entityDetails.IdUctovnychZavierok)
+                    {
+                        var listEntity = new FinancialStatementStaging { ErpId = item };
+                        _dboContext.StagingFinancialStatements.Add(listEntity);
+                    }
+                }
+                if (entityDetails.IdVyrocnychSprav != null)
+                {
+                    foreach (int item in entityDetails.IdVyrocnychSprav)
+                    {
+                        var listEntity = new AnnualReportStaging { ErpId = item };
+                        _dboContext.StagingAnnualReports.Add(listEntity);
+                    }
+                }
+*/
+                _dboContext.Add(entity);
                 await _dboContext.SaveChangesAsync();
             }
             catch (Exception ex)

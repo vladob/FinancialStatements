@@ -14,6 +14,14 @@ public partial class DboContext : DbContext
 {
     private readonly IConfiguration _configuration;
     private readonly ILogger _logger;
+    private static readonly ILoggerFactory MyLoggerFactory = LoggerFactory.Create(builder =>
+    {
+        builder
+            .AddFilter((category, level) =>
+                category == DbLoggerCategory.Database.Command.Name
+                && level == LogLevel.Information)
+            .AddConsole(); // Or any other logger
+    });
 
     public DboContext(DbContextOptions<DboContext> options, IConfiguration configuration, ILogger<DboContext> logger)
         : base(options)
@@ -64,19 +72,19 @@ public partial class DboContext : DbContext
     // Staging tables
 	// For dbo tables
       public DbSet<AccountingEntityStaging> StagingAccountingEntities { get; set; }
-      public DbSet<AnnualReport> StagingAnnualReports { get; set; }
-      public DbSet<AnnualReportAttachment> StagingAnnualReportAttachments { get; set; }
-      public DbSet<Attachment> StagingAttachments { get; set; }
-      public DbSet<FinancialReport> StagingFinancialReports { get; set; }
-      public DbSet<FinancialStatement> StagingFinancialStatements { get; set; }
-      public DbSet<ReportContent> StagingReportContents { get; set; }
-      public DbSet<ReportTable> StagingReportTables { get; set; }
+      public DbSet<AnnualReportStaging> StagingAnnualReports { get; set; }
+//      public DbSet<AnnualReportAttachment> StagingAnnualReportAttachments { get; set; }
+//      public DbSet<Attachment> StagingAttachments { get; set; }
+//      public DbSet<FinancialReportStaging> StagingFinancialReports { get; set; }
+      public DbSet<FinancialStatementStaging> StagingFinancialStatements { get; set; }
+//      public DbSet<ReportContent> StagingReportContents { get; set; }
+//      public DbSet<ReportTable> StagingReportTables { get; set; }
 
 	// For template tables
-	public DbSet<FinancialReportTemplateStaging> StagingFinancialReportTemplate { get; set; }
-    public DbSet<TemplateHeaderStaging> StagingTemplateHeaders { get; set; }
-    public DbSet<TemplateRowStaging> StagingTemplateRows { get; set; }
-    public DbSet<TemplateTableStaging> StagingTemplateTables { get; set; }
+        public DbSet<FinancialReportTemplateStaging> StagingFinancialReportTemplate { get; set; }
+//    public DbSet<TemplateHeaderStaging> StagingTemplateHeaders { get; set; }
+//    public DbSet<TemplateRowStaging> StagingTemplateRows { get; set; }
+//    public DbSet<TemplateTableStaging> StagingTemplateTables { get; set; }
 
 	// For classification tables
     public DbSet<LegalFormStaging> StagingLegalForms { get; set; }
@@ -92,6 +100,10 @@ public partial class DboContext : DbContext
             var connectionString = _configuration.GetConnectionString("FinancialStatementsDb");
             optionsBuilder.UseSqlServer(connectionString);
         }
+        
+    optionsBuilder
+        .UseLoggerFactory(LoggerFactory.Create(builder => builder.AddConsole()))
+        .EnableSensitiveDataLogging();
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -124,20 +136,20 @@ public partial class DboContext : DbContext
 
         // Apply staging table configurations
 		// For dbo tables
-        modelBuilder.ApplyConfiguration(new AccountingEntityConfiguration("staging"));
-        modelBuilder.ApplyConfiguration(new AnnualReportConfiguration("staging"));
-        modelBuilder.ApplyConfiguration(new AnnualReportAttachmentConfiguration("staging"));
-        modelBuilder.ApplyConfiguration(new AttachmentConfiguration("staging"));
-        modelBuilder.ApplyConfiguration(new FinancialReportConfiguration("staging"));
-        modelBuilder.ApplyConfiguration(new FinancialStatementConfiguration("staging"));
-        modelBuilder.ApplyConfiguration(new ReportContentConfiguration("staging"));
-        modelBuilder.ApplyConfiguration(new ReportTableConfiguration("staging"));
+        modelBuilder.ApplyConfiguration(new AccountingEntityStagingConfiguration("staging"));
+        modelBuilder.ApplyConfiguration(new AnnualReportStagingConfiguration("staging"));
+//        modelBuilder.ApplyConfiguration(new AnnualReportAttachmentConfiguration("staging"));
+//        modelBuilder.ApplyConfiguration(new AttachmentConfiguration("staging"));
+//        modelBuilder.ApplyConfiguration(new FinancialReportConfiguration("staging"));
+        modelBuilder.ApplyConfiguration(new FinancialStatementStagingConfiguration("staging"));
+//        modelBuilder.ApplyConfiguration(new ReportContentConfiguration("staging"));
+//        modelBuilder.ApplyConfiguration(new ReportTableConfiguration("staging"));
 
 		// For template tables
         modelBuilder.ApplyConfiguration(new FinancialReportTemplateStagingConfiguration());
-        modelBuilder.ApplyConfiguration(new TemplateTableStagingConfiguration());
-        modelBuilder.ApplyConfiguration(new TemplateHeaderStagingConfiguration());
-        modelBuilder.ApplyConfiguration(new TemplateRowStagingConfiguration());
+//        modelBuilder.ApplyConfiguration(new TemplateTableStagingConfiguration());
+//        modelBuilder.ApplyConfiguration(new TemplateHeaderStagingConfiguration());
+//        modelBuilder.ApplyConfiguration(new TemplateRowStagingConfiguration());
 
 		// For classification tables
         modelBuilder.ApplyConfiguration(new LegalFormStagingConfiguration());

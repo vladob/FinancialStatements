@@ -8,8 +8,7 @@ namespace FsDataAccess.Models
 {
     public class AccountingEntityStaging
     {
-        public int Id { get; set; }
-        public string ErpId { get; set; } = null!;
+        public int ErpId { get; set; }
         public string? Cin { get; set; }
         public string? Tin { get; set; }
         public string? Sid { get; set; }
@@ -29,8 +28,7 @@ namespace FsDataAccess.Models
         public bool? Consolidated { get; set; }
         public string? DataSource { get; set; }
         public DateOnly? LastModification { get; set; }
-        public virtual ICollection<FinancialStatement> FinancialStatementsNavigation { get; set; } = new List<FinancialStatement>();
-        public virtual ICollection<AnnualReport> AnnualReports { get; set; } = new List<AnnualReport>();
-        public virtual ICollection<FinancialStatement> FinancialStatements { get; set; } = new List<FinancialStatement>();
+        public virtual ICollection<AnnualReportStaging> AnnualReports { get; set; } = new List<AnnualReportStaging>();
+        public virtual ICollection<FinancialStatementStaging> FinancialStatements { get; set; } = new List<FinancialStatementStaging>();
     }
 }

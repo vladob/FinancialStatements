@@ -11,9 +11,9 @@ namespace FsDataAccess.Configurations
         }
         public void Configure(EntityTypeBuilder<FinancialReportTemplateStaging> entity)
         {
-            entity.HasKey(e => e.ErpId).HasName("PK_FinancialReportTemplatesStaging");
-
             entity.ToTable("FinancialReportTemplates", "staging");
+
+            entity.HasKey(e => e.ErpId).HasName("PK_FinancialReportTemplatesStaging");
 
             entity.Property(e => e.ErpId).HasMaxLength(30).IsUnicode(false).HasColumnName("ErpId");
             entity.Property(e => e.Name).HasMaxLength(100).IsUnicode(false).HasColumnName("name");
