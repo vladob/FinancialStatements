@@ -17,7 +17,7 @@ namespace FsDataAccess.Configurations
 
         public void Configure(EntityTypeBuilder<AccountingEntityStaging> entity)
         {
-            entity.ToTable("AccountingEntities", _schema);
+            entity.ToTable("AccountingEntities", "staging");
 
             entity.HasKey(e => e.ErpId).HasName("[PK_staging_AccountingEntities]");
 

@@ -17,9 +17,12 @@ namespace FsDataAccess.Configurations
 
         public void Configure(EntityTypeBuilder<AnnualReportStaging> entity)
         {
+            entity.ToTable("AnnualReports", "staging");
+
             entity.HasKey(e => e.ErpId).HasName("PK_staging_AnnualReports");
 
             entity.Property(e => e.ErpId).HasColumnName("ErpId");
+            entity.Property(e => e.AccountingEntityId).HasColumnName("accountingEntityId");
             entity.Property(e => e.TitleAe).HasMaxLength(500).IsUnicode(false).HasColumnName("titleAE");
             entity.Property(e => e.Type).HasMaxLength(100).IsUnicode(false).HasColumnName("type");
             entity.Property(e => e.FundName).HasMaxLength(500).IsUnicode(false).HasColumnName("fundName");
@@ -33,7 +36,6 @@ namespace FsDataAccess.Configurations
             entity.Property(e => e.LastModification).HasColumnName("lastModification");
             entity.Property(e => e.DataSource).HasMaxLength(30).IsUnicode(false).HasColumnName("dataSource");
 
-            entity.Property(e => e.AccountingEntityId).HasColumnName("accountingEntityId"); // Ensure this line exists
             entity.HasOne<AccountingEntityStaging>() // Assuming you have this navigation property in AnnualReportStaging
                 .WithMany()
                 .HasForeignKey(ar => ar.AccountingEntityId);

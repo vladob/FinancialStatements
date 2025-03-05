@@ -113,24 +113,25 @@ namespace FsApiAccess.Services
                     DataSource = entityDetails.ZdrojDat,
                     LastModification = entityDetails.DatumPoslednejUpravy
                 };
-/*
+
                 if (entityDetails.IdUctovnychZavierok != null)
                 {
                     foreach (int item in entityDetails.IdUctovnychZavierok)
                     {
-                        var listEntity = new FinancialStatementStaging { ErpId = item };
+                        var listEntity = new FinancialStatementStaging { ErpId = item, AccountingEntityId = entityDetails.Id };
                         _dboContext.StagingFinancialStatements.Add(listEntity);
                     }
                 }
+
                 if (entityDetails.IdVyrocnychSprav != null)
                 {
                     foreach (int item in entityDetails.IdVyrocnychSprav)
                     {
-                        var listEntity = new AnnualReportStaging { ErpId = item };
+                        var listEntity = new AnnualReportStaging { ErpId = item, AccountingEntityId = entityDetails.Id };
                         _dboContext.StagingAnnualReports.Add(listEntity);
                     }
                 }
-*/
+
                 _dboContext.Add(entity);
                 await _dboContext.SaveChangesAsync();
             }
