@@ -16,6 +16,7 @@
         <Button x:Name="btnRetrieveEntity" Content="Retrieve Entity" HorizontalAlignment="Left" Margin="10,91,0,0" VerticalAlignment="Top" Height="24" Width="140" Click="btnRetrieveEntity_Click"/>
         <TextBox x:Name="EntityCin" HorizontalAlignment="Left" Margin="10,68,0,0" TextWrapping="Wrap" Text="36206075" VerticalAlignment="Top" Width="140"/>
         <Label x:Name="AccountingEntityId" Content="EntityId" HorizontalAlignment="Left" Margin="10,120,0,0" VerticalAlignment="Top" Width="140"/>
+        <Button x:Name="btnProcessCinList" Content="Retrieve by CIN list" HorizontalAlignment="Left" Margin="10,146,0,0" VerticalAlignment="Top" Width="140" Click="btnProcessCinList_Click"/>
 
     </Grid>
 </Window>

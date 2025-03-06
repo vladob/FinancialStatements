@@ -92,7 +92,8 @@ public partial class DboContext : DbContext
     public DbSet<OrganizationSizeStaging> StagingOrganizationSizes { get; set; }
     public DbSet<OwnershipTypeStaging> StagingOwnershipTypes { get; set; }
     public DbSet<SkNaceStaging> StagingSkNaces { get; set; }
-	
+    public DbSet<ToRetrieveCinList> ToRetrieveCinList { get; set; }
+
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         if (!optionsBuilder.IsConfigured)
@@ -157,7 +158,10 @@ public partial class DboContext : DbContext
         modelBuilder.ApplyConfiguration(new OrganizationSizeStagingConfiguration());
         modelBuilder.ApplyConfiguration(new OwnershipTypeStagingConfiguration());
         modelBuilder.ApplyConfiguration(new SkNaceStagingConfiguration());
-		
+
+        // Configuration for ToRetrieveCinList entity
+        modelBuilder.Entity<ToRetrieveCinList>().HasKey(c => c.CIN);
+
         OnModelCreatingPartial(modelBuilder);
     }
 

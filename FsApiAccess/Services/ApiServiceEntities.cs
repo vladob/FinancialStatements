@@ -71,6 +71,15 @@ namespace FsApiAccess.Services
             return ids;
         }
 
+        public async Task RetrieveAndStoreAccountingEntityDataAsync(int entityId)
+        {
+            var entityDetails = await RetrieveAccountingEntityDetailsAsync(entityId);
+            if (entityDetails != null)
+            {
+                await StoreAccountingEntityDetailsAsync(entityDetails);
+            }
+        }
+
         public async Task<ApiAccountingEntityResponseModel?> RetrieveAccountingEntityDetailsAsync(int entityId)
         {
             var apiUrl = $"https://www.registeruz.sk/cruz-public/api/uctovna-jednotka?id={entityId}";
