@@ -1,5 +1,6 @@
 ﻿using FsApiAccess.Models;
 using FsDataAccess.Models;
+using FsDataAccess.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System;
@@ -134,6 +135,11 @@ namespace FsApiAccess.Services
 
                 _dboContext.Add(entity);
                 await _dboContext.SaveChangesAsync();
+
+                // Call the upsert task
+                var upsertTask = new UpsertAccountingEntities(_dboContext);
+                await upsertTask.AccountingEntitiesAsync();
+
             }
             catch (Exception ex)
             {
