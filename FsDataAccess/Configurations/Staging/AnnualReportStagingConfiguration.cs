@@ -36,9 +36,8 @@ namespace FsDataAccess.Configurations
             entity.Property(e => e.LastModification).HasColumnName("lastModification");
             entity.Property(e => e.DataSource).HasMaxLength(30).IsUnicode(false).HasColumnName("dataSource");
 
-            entity.HasOne<AccountingEntityStaging>() // Assuming you have this navigation property in AnnualReportStaging
-                .WithMany()
-                .HasForeignKey(ar => ar.AccountingEntityId);
+//            entity.HasOne<AccountingEntityStaging>().WithMany().HasForeignKey(ar => ar.AccountingEntityId); // Assuming you have this navigation property in AnnualReportStaging
+
         }
     }
 }
